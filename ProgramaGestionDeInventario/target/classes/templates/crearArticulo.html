@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Crear Usuario</title>
+    <title>Crear Articulo</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
 
@@ -16,7 +16,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container">
         <a class="navbar-brand" href="#">
-            <img src="logo.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
+            <img src="/media/logo.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
             SVG
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -41,34 +41,47 @@
 </nav>
 
 <div class="container mt-4">
-    <h1>Crear nuevo usuario</h1>
+    <h1>Crear nuevo articulo</h1>
 
-    <form th:action="@{/crearUsuario}" method="post">
+    <form th:action="@{/crearArticulo}" method="post">
         <div class="form-group">
             <label for="nombre">Nombre:</label>
             <input type="text" class="form-control" id="nombre" name="titulo" required maxlength="30">
         </div>
         <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="text" class="form-control" id="email" name="titulo" required maxlength="30">
+            <label for="codigo">Codigo:</label>
+            <input type="text" class="form-control" id="codigo" name="titulo" required maxlength="30">
         </div>
         <div class="form-group">
-            <label for="telefono">Telefono:</label>
-            <input type="text" class="form-control" id="telefono" name="titulo" required maxlength="30">
-        </div>
-        <div class="form-group">
-            <label for="domicilio">Domicilio:</label>
-            <input type="text" class="form-control" id="domicilio" name="titulo" required maxlength="30">
-        </div>
-        <div class="form-group">
-            <label for="rol">Rol:</label>
-            <select class="form-control" id="rol" name="rol" required>
-                <option value="usuario">Usuario</option>
-                <option value="administrador">Administrador</option>
+            <label for="categoria">Categoria:</label>
+            <select class="form-control" id="categoria" name="categoria" required>
+                <option value="categoria1">Categoria 1</option>
+                <option value="categoria2">Categoria 2</option>
+                <option value="categoria2">Categoria 3</option>
             </select>
         </div>
+        <div class="form-group">
+            <label for="stock">Precio unitario:</label>
+            <input type="text" class="form-control" id="stock" name="titulo" required maxlength="30">
+        </div>
+        <div class="form-group">
+            <label for="minimo">Cantidad minima necesaria:</label>
+            <input type="text" class="form-control" id="minimo" name="titulo" required maxlength="30">
+        </div>
+        <div class="form-group">
+            <label for="codDeposito">Codigo de deposito:</label>
+            <input type="text" class="form-control" id="codDeposito" name="titulo" required maxlength="30">
+        </div>
+        <div class="form-group">
+            <label for="caducidad">Fecha de caducidad:</label>
+            <input type="date" class="form-control" id="caducidad" name="caducidad" required>
+        </div>
+        <div class="form-group">
+            <label for="referencia">Unidad de referencia:</label>
+            <input type="text" class="form-control" id="referencia" name="titulo" required maxlength="30">
+        </div>
 
-        <button type="submit" class="btn btn-primary">Guardar Publicación</button>
+        <button type="submit" class="btn btn-primary">Guardar articulo</button>
     </form>
 </div>
 

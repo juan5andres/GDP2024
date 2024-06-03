@@ -16,7 +16,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container">
         <a class="navbar-brand" href="#">
-            <img src="logo.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
+            <img src="/media/logo.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
             SVG
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -49,6 +49,10 @@
             <input type="text" class="form-control" id="nombre" name="titulo" required maxlength="30">
         </div>
         <div class="form-group">
+            <label for="apellido">Apellido:</label>
+            <input type="text" class="form-control" id="apellido" name="titulo" required maxlength="30">
+        </div>
+        <div class="form-group">
             <label for="email">Email:</label>
             <input type="text" class="form-control" id="email" name="titulo" required maxlength="30">
         </div>
@@ -61,10 +65,23 @@
             <input type="text" class="form-control" id="domicilio" name="titulo" required maxlength="30">
         </div>
         <div class="form-group">
-            <label for="rol">Rol:</label>
+            <label for="contacto">Persona de contacto:</label>
+            <input type="text" class="form-control" id="contacto" name="titulo" required maxlength="30">
+        </div>
+        <div class="form-group">
+            <label for="pago">Forma de pago:</label>
+            <input type="text" class="form-control" id="pago" name="titulo" required maxlength="30">
+        </div>
+        <div class="form-group">
+            <label for="cuit">Cuit:</label>
+            <input type="text" class="form-control" id="cuit" name="titulo" required maxlength="30">
+        </div>
+        <div class="form-group">
+            <label for="rol">Categoria:</label>
             <select class="form-control" id="rol" name="rol" required>
-                <option value="usuario">Usuario</option>
-                <option value="administrador">Administrador</option>
+                <option value="categoria1">Categoria 1</option>
+                <option value="categoria2">Categoria 2</option>
+                <option value="categoria2">Categoria 3</option>
             </select>
         </div>
 
