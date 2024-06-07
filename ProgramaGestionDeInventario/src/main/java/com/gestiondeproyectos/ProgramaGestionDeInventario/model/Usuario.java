@@ -1,7 +1,6 @@
 package com.gestiondeproyectos.ProgramaGestionDeInventario.model;
 import jakarta.persistence.*;
 import lombok.Data;
-
 @Data
 @Entity
 public class Usuario {
@@ -25,13 +24,17 @@ public class Usuario {
     @Column(name = "Domicilio", length = 200, nullable = false)
     private String domicilio;
 
-    public Usuario(Long iden, String nombre, String email, String telefono, Rol rol, String domicilio) {
+    @Column(name = "Contrasenia", length = 200, nullable =false)
+    private String contraseña;
+
+    public Usuario(Long iden, String nombre, String email, String telefono, Rol rol, String domicilio, String contraseña) {
         this.iden = iden;
         this.nombre = nombre;
         this.email = email;
         this.telefono = telefono;
         this.rol = rol;
         this.domicilio = domicilio;
+        this.contraseña = contraseña;
     }
     public Usuario() {}
 }
