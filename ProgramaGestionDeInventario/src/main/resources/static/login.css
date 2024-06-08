@@ -1,7 +1,7 @@
 .login-page{
     height: 100vh;
     max-height: 100vh;
-    background: url(https://img.freepik.com/vector-gratis/fondo-futurista-tecnologia-degradada_23-2149122416.jpg?w=1060&t=st=1717175955~exp=1717176555~hmac=b69992b3f0d1395e6f812ececa3ad4ba2b29cc4aad0de110d9057aaa03e8b6d9);
+    background-image: url("../static/media/fondoLogin.jpg");
     top: 0;
     left: 0;
     background-size: cover;
