@@ -1,8 +1,8 @@
 package com.gestiondeproyectos.ProgramaGestionDeInventario.service;
 
+import com.gestiondeproyectos.ProgramaGestionDeInventario.dao.UsuarioDao;
 import com.gestiondeproyectos.ProgramaGestionDeInventario.model.Usuario;
-import com.gestiondeproyectos.ProgramaGestionDeInventario.repository.RoleRepository;
-import com.gestiondeproyectos.ProgramaGestionDeInventario.repository.UserRepository;
+import com.gestiondeproyectos.ProgramaGestionDeInventario.dao.RolDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -12,22 +12,22 @@ import java.util.Optional;
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
 
-    private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
+    private final UsuarioDao usuarioDao;
+    private final RolDao rolDao;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UsuarioServiceImpl(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
+    public UsuarioServiceImpl(UsuarioDao usuarioDao, RolDao rolDao, PasswordEncoder passwordEncoder) {
+        this.usuarioDao = usuarioDao;
+        this.rolDao = rolDao;
         this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     public void saveUser(Usuario user, int roleId) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRol(roleRepository.findRolByIden(roleId));
-        userRepository.save(user);
+        user.setRol(rolDao.findRolByIden(roleId));
+        usuarioDao.save(user);
     }
 
     @Override
@@ -42,6 +42,6 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public Optional<Usuario> findByUsername(String username) {
-        return Optional.ofNullable(userRepository.findByNombre(username));
+        return Optional.ofNullable(usuarioDao.findByNombre(username));
     }
 }

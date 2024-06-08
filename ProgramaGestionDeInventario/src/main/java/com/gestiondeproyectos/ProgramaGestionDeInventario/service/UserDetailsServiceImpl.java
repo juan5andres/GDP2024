@@ -1,7 +1,7 @@
 package com.gestiondeproyectos.ProgramaGestionDeInventario.service;
 
 import com.gestiondeproyectos.ProgramaGestionDeInventario.model.Usuario;
-import com.gestiondeproyectos.ProgramaGestionDeInventario.repository.UserRepository;
+import com.gestiondeproyectos.ProgramaGestionDeInventario.dao.UsuarioDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,16 +14,16 @@ import java.util.Collections;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private final UserRepository userRepository;
+    private final UsuarioDao usuarioDao;
 
     @Autowired
-    public UserDetailsServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserDetailsServiceImpl(UsuarioDao usuarioDao) {
+        this.usuarioDao = usuarioDao;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Usuario user = userRepository.findByNombre(username);
+        Usuario user = usuarioDao.findByNombre(username);
         if (user == null) {
             throw new UsernameNotFoundException("User not found");
         }
