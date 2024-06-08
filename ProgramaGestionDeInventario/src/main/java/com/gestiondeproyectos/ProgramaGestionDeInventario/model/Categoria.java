@@ -9,7 +9,7 @@ public class Categoria {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long iden;
 
-    @Column(name = "Descripcion", length = 100, nullable = false)
+    @Column(name = "descripcion", nullable = false)
     private String descripcion;
 
     public Categoria(Long iden, String descripcion) {

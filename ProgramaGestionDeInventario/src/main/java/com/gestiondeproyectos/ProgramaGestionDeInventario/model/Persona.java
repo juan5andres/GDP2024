@@ -9,19 +9,19 @@ public class Persona {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long iden;
 
-    @Column(name = "Nombre", length = 50, nullable = false)
+    @Column(name = "nombre", nullable = false)
     private String nombre;
 
-    @Column(name = "Apellido", length = 50, nullable = false)
+    @Column(name = "apellido", nullable = false)
     private String apellido;
 
-    @Column(name = "Email", length = 50, nullable = false)
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "Telefono", length = 50, nullable = false)
+    @Column(name = "telefono", nullable = false)
     private String telefono;
 
-    @Column(name = "Domicilio", length = 50, nullable = false)
+    @Column(name = "domicilio", nullable = false)
     private String domicilio;
 
     public Persona(Long iden, String nombre, String apellido, String email, String telefono, String domicilio) {

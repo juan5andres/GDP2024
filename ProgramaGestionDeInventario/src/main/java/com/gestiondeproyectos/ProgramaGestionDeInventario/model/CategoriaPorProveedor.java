@@ -10,11 +10,11 @@ public class CategoriaPorProveedor {
     private Long iden;
 
     @ManyToOne
-    @JoinColumn(name = "Proveedor_Iden", nullable = false)
+    @JoinColumn(name = "proveedor_Iden", nullable = false)
     private Proveedor proveedor;
 
     @ManyToOne
-    @JoinColumn(name = "Categoria_Iden", nullable = false)
+    @JoinColumn(name = "categoria_Iden", nullable = false)
     private Categoria categoria;
 
     public CategoriaPorProveedor(Long iden, Proveedor proveedor, Categoria categoria) {

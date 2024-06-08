@@ -9,7 +9,7 @@ public class Rol {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long iden;
 
-    @Column(name = "Descripcion", length = 100, nullable = false)
+    @Column(name = "descripcion", nullable = false)
     private String descripcion;
 
     public Rol(Long iden, String descripcion) {

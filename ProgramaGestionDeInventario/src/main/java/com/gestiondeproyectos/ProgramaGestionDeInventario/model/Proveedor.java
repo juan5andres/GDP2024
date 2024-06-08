@@ -9,29 +9,29 @@ public class Proveedor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long iden;
 
-    @Column(name = "Nombre", length = 100, nullable = false)
+    @Column(name = "nombre", nullable = false)
     private String nombre;
 
-    @Column(name = "Email", length = 100, nullable = false)
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "Telefono", length = 20, nullable = false)
+    @Column(name = "telefono", nullable = false)
     private String telefono;
 
-    @Column(name = "Domicilio", length = 200, nullable = false)
+    @Column(name = "domicilio", nullable = false)
     private String domicilio;
 
     @ManyToOne
-    @JoinColumn(name = "Persona_De_Contacto", nullable = false)
+    @JoinColumn(name = "persona_De_Contacto", nullable = false)
     private Persona personaDeContacto;
 
-    @Column(name = "Forma_De_Pago", length = 100, nullable = false)
+    @Column(name = "forma_De_Pago", nullable = false)
     private String formaDePago;
 
-    @Column(name = "Cuit", length = 20, nullable = false)
+    @Column(name = "cuit", nullable = false)
     private String cuit;
 
-    @Column(name = "Baja", nullable = false)
+    @Column(name = "baja", nullable = false)
     private boolean baja;
 
     public Proveedor(Long iden, String nombre, String email, String telefono, String domicilio, Persona personaDeContacto, String formaDePago, String cuit, boolean baja) {

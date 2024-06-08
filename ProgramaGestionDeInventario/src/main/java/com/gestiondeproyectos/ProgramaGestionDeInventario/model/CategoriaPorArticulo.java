@@ -10,11 +10,11 @@ public class CategoriaPorArticulo {
     private Long iden;
 
     @ManyToOne
-    @JoinColumn(name = "Articulo_Iden", nullable = false)
+    @JoinColumn(name = "articulo_Iden", nullable = false)
     private Articulo articulo;
 
     @ManyToOne
-    @JoinColumn(name = "Categoria_Iden", nullable = false)
+    @JoinColumn(name = "categoria_Iden", nullable = false)
     private Categoria categoria;
 
     public CategoriaPorArticulo(Long iden, Articulo articulo, Categoria categoria) {
