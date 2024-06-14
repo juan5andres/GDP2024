@@ -7,43 +7,100 @@
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">
   <style>
     .form-group {
-        margin-bottom: 1rem;
+      margin-bottom: 1rem;
+    }
+    body {
+      background-image: url('/static/media/fondoIndex.AVIF');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .nav-link {
+      text-shadow: 4px 4px 5px rgba(0, 0, 0, 1.2);
+    }
+    .container {
+      background-color: rgba(255, 255, 255, 0);
+    }
+    .square a {
+      display: block;
+      height: 100%;
+      width: 100%;
+      text-decoration: none;
+    }
+    #articulosTable {
+      color: white;
+      margin-top: 50px;
+    }
+    .dataTables_info,
+    .dataTables_length label {
+      color: white !important;
+    }
+    h1 {
+      color: white;
+    }
+    .content {
+      margin-top: 250px;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      border-radius: 10px;
+    }
+    .dataTables_filter input {
+      background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco semi-transparente */
+      color: black; /* Color del texto negro */
+      border: 1px solid #ccc; /* Borde claro */
+      border-radius: 4px; /* Bordes redondeados */
+      padding: 6px; /* Espaciado interno */
+      width: auto; /* Ajuste de ancho */
+    }
+    .dataTables_filter label {
+      color: white; /* Color del texto del label blanco */
+      font-weight: bold; /* Texto en negrita */
+      margin-right: 8px; /* Espaciado a la derecha */
     }
   </style>
 </head>
-<body>
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<header style="background-color: rgba(255, 255, 255, 0);">
   <div class="container">
-    <a class="navbar-brand" href="#">
-      <img src="/media/logo.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
-      SVG
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" th:href="@{/adminHome}">Inicio</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" th:href="@{/}">Pagina principal</a>
-        </li>
-      </ul>
-    </div>
-    <form action="#" th:action="@{/login}" th:method="post" class="d-flex">
-      <input class="btn btn-danger form-control me-2" type="submit" value="Cerrar sesión"
-             onclick="return confirm('¿Desea cerrar sesión?');">
-    </form>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgba(0, 0, 0, 0.5);">
+      <a class="navbar-brand text-white font-weight-bold" href="#">
+        SGI
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link font-weight-bold text-white" href="/reportes">Reportes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link font-weight-bold text-white" href="/facturacion">Facturación</a>
+          </li>
+          <li class="nav-item font-weight-bold">
+            <a class="nav-link text-white" href="nosotros">Nosotros</a>
+          </li>
+          <li class="nav-item font-weight-bold">
+            <a class="nav-link text-white donar-button" href="/cerrarSesion">Cerrar sesión</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
   </div>
-</nav>
-
-<div class="container mt-4">
-  <h1>Lista de Artículos</h1>
-
-  <table id="articulosTable" class="table table-striped">
+</header>
+<body>
+<div class="container content">
+  <h1 class="text-center">Lista de Artículos</h1>
+  <table id="articulosTable" class="table table-striped table-dark">
     <thead>
     <tr>
       <th>Nombre</th>
@@ -74,17 +131,23 @@
     </tbody>
   </table>
 </div>
-
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
 <script>
-    $(document).ready(function() {
-        $('#articulosTable').DataTable({
-            "order": [[0, "asc"]]
-        });
+  $(document).ready(function() {
+    $('#articulosTable').DataTable({
+      "order": [[0, "asc"]],
+      "paging": true,
+      "searching": true,
+      "lengthChange": true,
+      "info": true,
+      "pageLength": 10,
+      "language": {
+        "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
+      }
     });
+  });
 </script>
-
 </body>
 </html>
