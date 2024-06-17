@@ -16,6 +16,5 @@ public class Categoria {
         this.iden = iden;
         this.descripcion = descripcion;
     }
-
     public Categoria() {}
 }
