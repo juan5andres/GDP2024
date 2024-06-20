@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -16,8 +15,8 @@
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            height: 100vh; /* Ajustar al tamaño completo de la ventana */
-            margin: 0; /* Eliminar márgenes para el cuerpo */
+            height: 100vh;
+            margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -46,34 +45,33 @@
         }
     </style>
 </head>
-
 <body>
 <div class="container">
     <div class="login-form">
-        <form method="post">
+        <form th:action="@{/login}" method="post">
             <h3 class="fs-2 fw-bold text-center mb-4">¡Bienvenido!</h3>
 
             <div class="input-group mb-4">
-                    <span class="input-group-text bg-transparent border-0 border-bottom border-secondary border-2 rounded-0"
-                          id="basic-addon1"><i class="fas fa-user" style="color: #737373;"></i></span>
+                <span class="input-group-text bg-transparent border-0 border-bottom border-secondary border-2 rounded-0"
+                      id="basic-addon1"><i class="fas fa-user" style="color: #737373;"></i></span>
                 <input type="text" id="username" name="username"
                        class="login-input form-control border-0 focus-ring focus-ring-light border-bottom border-secondary border-2 rounded-0"
-                       placeholder="Nombre de usuario" aria-label="Username" autofocus>
+                       placeholder="Nombre de usuario o email" aria-label="Username" autofocus required>
             </div>
 
             <div class="input-group mb-4">
-                    <span class="input-group-text bg-transparent border-0 border-bottom border-secondary border-2 rounded-0"
-                          id="basic-addon1"><i class="fas fa-key" style="color: #737373;"></i></span>
+                <span class="input-group-text bg-transparent border-0 border-bottom border-secondary border-2 rounded-0"
+                      id="basic-addon1"><i class="fas fa-key" style="color: #737373;"></i></span>
                 <input type="password" id="password" name="password"
                        class="login-input form-control border-0 focus-ring focus-ring-light border-bottom border-secondary border-2 rounded-0"
-                       placeholder="Contraseña" aria-label="Password">
+                       placeholder="Contraseña" aria-label="Password" required>
             </div>
 
             <button type="submit" value="Log in"
                     class="w-100 btn btn-dark fw-semibold py-1">INGRESAR</button>
 
             <div class="m-0 d-flex justify-content-center align-items-center pt-2">
-                <button class="btn btn-light btn-custom">
+                <button type="button" class="btn btn-light btn-custom">
                     <img src="https://img.icons8.com/color/48/000000/google-logo.png" alt="Google" width="20"
                          height="20">
                     Enlazar con Google
@@ -96,5 +94,4 @@
         integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
         crossorigin="anonymous"></script>
 </body>
-
 </html>

@@ -1,9 +1,11 @@
 package com.gestiondeproyectos.ProgramaGestionDeInventario.model;
+
 import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
 @Entity
+@Table(name = "rol")
 public class Rol {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,9 +14,9 @@ public class Rol {
     @Column(name = "descripcion", nullable = false)
     private String descripcion;
 
-    public Rol(Long iden, String descripcion) {
-        this.iden = iden;
+    public Rol() {}
+
+    public Rol(String descripcion) {
         this.descripcion = descripcion;
     }
-    public Rol() {}
 }

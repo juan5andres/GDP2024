@@ -11,7 +11,7 @@ import java.util.Optional;
 import java.util.List;
 
 @Service
-public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
+public class UsuarioServiceImpl implements UsuarioService {
 
     private final UsuarioDao usuarioDao;
     private final RolDao rolDao;
@@ -45,7 +45,6 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
     public Optional<Usuario> findByUsername(String username) {
         return Optional.ofNullable(usuarioDao.findByNombre(username));
     }
-
 
     @Override
     public List<Usuario> listarUsuarios(){

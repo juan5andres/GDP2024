@@ -84,7 +84,7 @@
             <a class="nav-link font-weight-bold text-white" href="/facturacion">Facturación</a>
           </li>
           <li class="nav-item font-weight-bold">
-            <a class="nav-link text-white" href="nosotros">Nosotros</a>
+            <a class="nav-link text-white" href="/nosotros">Nosotros</a>
           </li>
           <li class="nav-item font-weight-bold">
             <a class="nav-link text-white donar-button" href="/cerrarSesion">Cerrar sesión</a>
@@ -111,7 +111,6 @@
     </tr>
     </thead>
     <tbody>
-    <!-- Los datos reales se deben llenar usando Thymeleaf en un entorno real -->
     <tr th:each="proveedor : ${proveedores}">
       <td th:text="${proveedor.nombre}">Nombre</td>
       <td th:text="${proveedor.email}">Email</td>
@@ -131,7 +130,6 @@
 <script>
   $(document).ready(function() {
     $('#proveedoresTable').DataTable({
-      "order": [[0, "asc"]],
       "paging": true,
       "searching": true,
       "lengthChange": true,

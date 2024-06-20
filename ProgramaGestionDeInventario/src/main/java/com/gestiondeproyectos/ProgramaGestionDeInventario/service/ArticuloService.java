@@ -1,6 +1,9 @@
 package com.gestiondeproyectos.ProgramaGestionDeInventario.service;
+
 import com.gestiondeproyectos.ProgramaGestionDeInventario.model.Articulo;
 
-public interface ArticuloService{
-    
+import java.util.List;
+
+public interface ArticuloService {
+    List<Articulo> listItemsBySupplierName(String nombreProveedor);
 }

@@ -1,4 +1,5 @@
 package com.gestiondeproyectos.ProgramaGestionDeInventario.model;
+
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -23,6 +24,5 @@ public class CategoriaPorArticulo {
         this.categoria = categoria;
     }
 
-    public CategoriaPorArticulo() {
-    }
+    public CategoriaPorArticulo() {}
 }
