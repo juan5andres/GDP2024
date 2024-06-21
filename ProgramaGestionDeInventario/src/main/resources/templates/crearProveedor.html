@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Usuario</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">
+            <img src="../static/media/logo.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
+            SVG
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/adminHome}">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/}">Pagina principal</a>
+                </li>
+            </ul>
+        </div>
+        <form action="#" th:action="@{/login}" th:method="post" class="d-flex">
+            <input class="btn btn-danger form-control me-2" type="submit" value="Cerrar sesión"
+                   onclick="return confirm('¿Desea cerrar sesión?');">
+        </form>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <h1>Crear nuevo proveedor</h1>
+
+    <form th:action="@{/crearUsuario}" method="post">
+        <div class="form-group">
+            <label for="nombre">Nombre:</label>
+            <input type="text" class="form-control" id="nombre" name="titulo" required maxlength="30">
+        </div>
+        <div class="form-group">
+            <label for="apellido">Apellido:</label>
+            <input type="text" class="form-control" id="apellido" name="titulo" required maxlength="30">
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="text" class="form-control" id="email" name="titulo" required maxlength="30">
+        </div>
+        <div class="form-group">
+            <label for="telefono">Telefono:</label>
+            <input type="text" class="form-control" id="telefono" name="titulo" required maxlength="30">
+        </div>
+        <div class="form-group">
+            <label for="domicilio">Domicilio:</label>
+            <input type="text" class="form-control" id="domicilio" name="titulo" required maxlength="30">
+        </div>
+        <div class="form-group">
+            <label for="contacto">Persona de contacto:</label>
+            <input type="text" class="form-control" id="contacto" name="titulo" required maxlength="30">
+        </div>
+        <div class="form-group">
+            <label for="pago">Forma de pago:</label>
+            <input type="text" class="form-control" id="pago" name="titulo" required maxlength="30">
+        </div>
+        <div class="form-group">
+            <label for="cuit">Cuit:</label>
+            <input type="text" class="form-control" id="cuit" name="titulo" required maxlength="30">
+        </div>
+        <div class="form-group">
+            <label for="rol">Categoria:</label>
+            <select class="form-control" id="rol" name="rol" required>
+                <option value="categoria1">Categoria 1</option>
+                <option value="categoria2">Categoria 2</option>
+                <option value="categoria2">Categoria 3</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Guardar Publicación</button>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
