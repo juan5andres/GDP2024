@@ -13,6 +13,12 @@ public class CategoriaServiceImpl implements CategoriaService{
     @Autowired
     private CategoriaDao categoriaDao;
 
+    @Autowired
+    private ArticuloService articuloService;
+
+    @Autowired
+    private ProveedorService proveedorService;
+
     @Override
     @Transactional(readOnly = true)
     public List<Categoria> listarCategorias() {
@@ -40,6 +46,17 @@ public class CategoriaServiceImpl implements CategoriaService{
         // NOTA: el .get() da error si no encuentra el objeto
         // El .orElse(variablePorDefecto) devuelve la variablePorDefecto si el objeto encontrado no se encuentra
         return categoriaDao.findById(categoria.getIden()).orElse(null); 
+    }
+
+    public boolean categoriaNoVinculada (Categoria categoria){
+        var listaDeArticulos = articuloService.searchItemsByCategoryDescription(categoria.getDescripcion());
+        var listaDeProveedores = proveedorService.searchProvidersByCategoryDescription(categoria.getDescripcion());
+        if(listaDeArticulos.isEmpty() && listaDeProveedores.isEmpty()){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
 }

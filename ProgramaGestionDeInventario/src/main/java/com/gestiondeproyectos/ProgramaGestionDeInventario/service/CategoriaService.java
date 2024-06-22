@@ -12,4 +12,7 @@ public interface CategoriaService {
     
     public Categoria encontrarCategoria(Categoria categoria);
 
+    public boolean categoriaNoVinculada(Categoria categoria);
+
+    
 }

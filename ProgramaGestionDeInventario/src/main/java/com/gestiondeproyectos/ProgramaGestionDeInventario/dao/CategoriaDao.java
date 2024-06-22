@@ -7,4 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface CategoriaDao extends JpaRepository<Categoria, Long>{
     
+    public Categoria findByIden(Long iden);
+
 }

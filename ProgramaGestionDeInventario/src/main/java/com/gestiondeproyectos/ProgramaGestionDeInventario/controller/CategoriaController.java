@@ -39,8 +39,13 @@ public class CategoriaController{
 
     @GetMapping("/eliminarCategoria")
     public String eliminarCategoria(Categoria categoria) {
-        categoriaService.eliminar(categoria);
-        return "redirect:/";
+        if(categoriaService.categoriaNoVinculada(categoria)){
+            categoriaService.eliminar(categoria);
+            return "redirect:/";
+        }
+        else{
+            return "redirect:/";
+        }
     }
 
 }

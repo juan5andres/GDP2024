@@ -21,4 +21,8 @@ public class ArticuloServiceImpl implements ArticuloService {
     public List<Articulo> listItemsBySupplierName(String nombreProveedor) {
         return articuloDao.listItemsBySupplierName(nombreProveedor);
     }
+
+    public List<Articulo> searchItemsByCategoryDescription(String descripcion) {
+        return articuloDao.listItemsByCategoryDescription(descripcion);
+    }  
 }

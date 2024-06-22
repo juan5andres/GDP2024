@@ -21,4 +21,9 @@ public class ProveedorServiceImpl implements ProveedorService {
     public List<Proveedor> listarProveedores() {
         return proveedorDao.findAll();
     }
+
+    @Override
+    public List<Proveedor> searchProvidersByCategoryDescription(String descripcion) {
+      return proveedorDao.listProvidersByCategoryDescription(descripcion);
+    }
 }

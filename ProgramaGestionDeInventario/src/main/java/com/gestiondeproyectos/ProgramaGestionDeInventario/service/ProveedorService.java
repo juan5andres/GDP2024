@@ -5,4 +5,6 @@ import java.util.List;
 
 public interface ProveedorService {
     List<Proveedor> listarProveedores();
+
+    List<Proveedor> searchProvidersByCategoryDescription(String descripcion);
 }

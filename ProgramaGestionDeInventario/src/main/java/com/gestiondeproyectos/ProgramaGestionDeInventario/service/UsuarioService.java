@@ -2,6 +2,7 @@ package com.gestiondeproyectos.ProgramaGestionDeInventario.service;
 
 import com.gestiondeproyectos.ProgramaGestionDeInventario.model.Usuario;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface UsuarioService {
@@ -11,4 +12,5 @@ public interface UsuarioService {
     void saveRegularUser(Usuario user);
     Optional<Usuario> findByUsername(String username);
 
+    public List<Usuario> listarUsuarios();
 }

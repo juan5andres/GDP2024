@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface ArticuloService {
     List<Articulo> listItemsBySupplierName(String nombreProveedor);
+
+    List<Articulo> searchItemsByCategoryDescription(String descripcion);
 }
