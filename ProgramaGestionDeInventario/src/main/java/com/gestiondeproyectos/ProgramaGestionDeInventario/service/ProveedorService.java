@@ -7,4 +7,6 @@ public interface ProveedorService {
     List<Proveedor> listarProveedores();
 
     List<Proveedor> searchProvidersByCategoryDescription(String descripcion);
+
+	List<Proveedor> searchProvidersByPerson(Long iden);
 }

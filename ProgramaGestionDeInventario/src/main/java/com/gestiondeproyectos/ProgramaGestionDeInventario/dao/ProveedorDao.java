@@ -15,4 +15,7 @@ public interface ProveedorDao extends JpaRepository<Proveedor, Long> {
            "WHERE lower(p.descripcion) LIKE lower(CONCAT('%', ?1, '%')) " +
            "ORDER BY p.nombre ASC", nativeQuery = true)
     List<Proveedor>  listProvidersByCategoryDescription(String keyword);
+
+    @Query(value = "SELECT * FROM proveedor p WHERE p.persona_de_contacto = ?1", nativeQuery = true)
+    List<Proveedor> listProvidersByPerson(Long iden);
 }

@@ -26,4 +26,9 @@ public class ProveedorServiceImpl implements ProveedorService {
     public List<Proveedor> searchProvidersByCategoryDescription(String descripcion) {
       return proveedorDao.listProvidersByCategoryDescription(descripcion);
     }
+
+    @Override
+    public List<Proveedor> searchProvidersByPerson(Long iden) {
+      return proveedorDao.listProvidersByPerson(iden);
+    }
 }
