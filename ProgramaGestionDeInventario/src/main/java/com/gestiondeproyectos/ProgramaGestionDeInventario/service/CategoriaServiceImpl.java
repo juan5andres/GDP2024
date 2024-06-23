@@ -45,9 +45,11 @@ public class CategoriaServiceImpl implements CategoriaService{
         // El .get() devuelve el objeto buscado
         // NOTA: el .get() da error si no encuentra el objeto
         // El .orElse(variablePorDefecto) devuelve la variablePorDefecto si el objeto encontrado no se encuentra
-        return categoriaDao.findByIden(categoria.getIden()); 
+        return categoriaDao.findById(categoria.getIden()).orElse(null); 
     }
 
+    @Override
+    @Transactional(readOnly=true)
     public boolean categoriaNoVinculada (Categoria categoria){
         var listaDeArticulos = articuloService.searchItemsByCategoryDescription(categoria.getDescripcion());
         var listaDeProveedores = proveedorService.searchProvidersByCategoryDescription(categoria.getDescripcion());

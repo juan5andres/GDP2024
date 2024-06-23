@@ -18,4 +18,8 @@ public interface ArticuloDao extends JpaRepository<Articulo, Long> {
            "WHERE lower(a.descripcion) LIKE lower(CONCAT('%', ?1, '%')) " +
            "ORDER BY a.nombre ASC", nativeQuery = true)
     List<Articulo> listItemsByCategoryDescription(String keyword);
+
+
+
+    
 }

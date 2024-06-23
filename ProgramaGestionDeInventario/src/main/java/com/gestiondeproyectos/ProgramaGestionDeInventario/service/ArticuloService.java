@@ -8,4 +8,14 @@ public interface ArticuloService {
     List<Articulo> listItemsBySupplierName(String nombreProveedor);
 
     List<Articulo> searchItemsByCategoryDescription(String descripcion);
+
+    public List<Articulo> listarArticulos();
+
+    public void guardar(Articulo articulo);
+
+    public Articulo encontrarArticulo(Articulo articulo);
+
+    public List<Articulo> listarArticulosConStockBajo();
+
+    public void eliminar(Articulo articulo);
 }

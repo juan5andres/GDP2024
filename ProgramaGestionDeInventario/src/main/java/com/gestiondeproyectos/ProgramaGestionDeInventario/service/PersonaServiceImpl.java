@@ -18,7 +18,7 @@ public class PersonaServiceImpl implements PersonaService{
     private ProveedorService proveedorService;
 
     @Override
-    @Transactional (readOnly = true)
+    @Transactional(readOnly = true)
     public List<Persona> listarPersonas(){
         return (List<Persona>) personaDao.findAll();
     }
@@ -38,10 +38,11 @@ public class PersonaServiceImpl implements PersonaService{
     @Override
     @Transactional(readOnly = true)
     public Persona encontrarPersona(Persona persona) {
-        return personaDao.findByIden(persona.getIden()); 
+        return personaDao.findById(persona.getIden()).orElse(null); 
     }
 
     @Override
+    @Transactional(readOnly=true)
     public boolean personaNoVinculada(Persona persona) {
         var listaDeProveedores = proveedorService.searchProvidersByPerson(persona.getIden());
         if (listaDeProveedores.isEmpty()){

@@ -12,7 +12,7 @@ public class Articulo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long iden;
 
     @Column(name = "nombre", nullable = false)
     private String nombre;
@@ -41,7 +41,7 @@ public class Articulo {
     private String codigoProducto;
 
     public Articulo(Long iden, String nombre, int stock, double precioUnitario, Date fechaVencimiento, String unidadDeReferencia, int cantidadMinima, String codigoProducto) {
-        this.id = iden;
+        this.iden = iden;
         this.nombre = nombre;
         this.stock = stock;
         this.precioUnitario = precioUnitario;
