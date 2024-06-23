@@ -30,7 +30,7 @@ public class CategoriaController{
         return "redirect:/";
         }
 
-    @GetMapping("/editarCategoria/{idCategoria}")
+    @GetMapping("/editarCategoria/{iden}")
     public String editarCategoria(Categoria categoria, Model model) {
         categoria = categoriaService.encontrarCategoria(categoria);
         model.addAttribute("categoria", categoria);

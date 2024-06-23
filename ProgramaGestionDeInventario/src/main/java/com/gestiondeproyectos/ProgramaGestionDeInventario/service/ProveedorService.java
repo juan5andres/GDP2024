@@ -9,4 +9,8 @@ public interface ProveedorService {
     List<Proveedor> searchProvidersByCategoryDescription(String descripcion);
 
 	List<Proveedor> searchProvidersByPerson(Long iden);
+
+    Proveedor encontrarProveedor(Proveedor proveedor);
+
+    void guardar(Proveedor proveedor);
 }

@@ -26,7 +26,7 @@ public class PersonaController {
             return "redirect:/";
         }
 
-    @GetMapping("/editarPersona/{idPersona}")
+    @GetMapping("/editarPersona/{iden}")
     public String editarPersona(Persona persona, Model model) {
         persona = personaService.encontrarPersona(persona);
         model.addAttribute("persona", persona);

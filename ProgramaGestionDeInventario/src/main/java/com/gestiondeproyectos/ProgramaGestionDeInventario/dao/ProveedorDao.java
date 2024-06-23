@@ -18,4 +18,6 @@ public interface ProveedorDao extends JpaRepository<Proveedor, Long> {
 
     @Query(value = "SELECT * FROM proveedor p WHERE p.persona_de_contacto = ?1", nativeQuery = true)
     List<Proveedor> listProvidersByPerson(Long iden);
+
+    Proveedor findByIden(Long iden);
 }
