@@ -44,5 +44,11 @@ public class PersonaController {
         }
     }
 
+    @GetMapping("/listarPersonas")
+    public String listarPersonas(Model model) {
+        var personas = personaService.listarPersonas();
+        model.addAttribute("personas", personas);
+        return "listarPersonas";
+    }
 
 }

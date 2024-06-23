@@ -48,4 +48,12 @@ public class CategoriaController{
         }
     }
 
+    @GetMapping("/listarCategorias")
+    public String listarCategorias(Model model) {
+        var categorias = categoriaService.listarCategorias();
+        model.addAttribute("categorias", categorias);
+        return "listarCategorias";
+    }
+
+
 }
