@@ -26,7 +26,7 @@ public class ArticuloController {
     public String agregarArticulo(Articulo articulo, Model modelCategorias){
         var categorias = categoriaService.listarCategorias();
         modelCategorias.addAttribute("categorias", categorias);
-        return "modificarArticulo";
+        return "crearArticulo";
     }
     
     @PostMapping("/guardarArticulo")
@@ -44,7 +44,7 @@ public class ArticuloController {
         modelCategoria.addAttribute("categorias", categorias);
         articulo = articuloService.encontrarArticulo(articulo);
         modelArticulo.addAttribute("articulo", articulo);
-        return "modificarArticulo";
+        return "crearArticulo";
     }
     
     @GetMapping("/eliminarArticulo")

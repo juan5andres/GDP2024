@@ -32,7 +32,7 @@ public class ProveedorController {
         var categorias = categoriaService.listarCategorias();
         modelPersonas.addAttribute("personas", personas);
         modelCategorias.addAttribute("categorias", categorias);
-        return "modificarProveedor";
+        return "crearProveedor";
     }
     
     @PostMapping("/guardarProveedor")
@@ -53,7 +53,7 @@ public class ProveedorController {
         modelCategoria.addAttribute("categorias", categorias);
         proveedor = proveedorService.encontrarProveedor(proveedor);
         modelProveedor.addAttribute("proveedor", proveedor);
-        return "modificarProveedor";
+        return "crearProveedor";
     }
     
     @PostMapping("/eliminarProveedor")
