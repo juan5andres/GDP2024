@@ -26,7 +26,7 @@ public class ProveedorController {
         this.proveedorService = proveedorService;
     }
 
-       @GetMapping("/agregarProveedor")
+    @GetMapping("/agregarProveedor")
     public String agregarProveedor(Proveedor proveedor, Model modelPersonas, Model modelCategorias){
         var personas = personaService.listarPersonas();
         var categorias = categoriaService.listarCategorias();
@@ -56,11 +56,9 @@ public class ProveedorController {
         return "modificarProveedor";
     }
     
-    @GetMapping("/eliminarProveedor")
-    public String eliminarProveedor(Proveedor proveedor, Model model) {
-        proveedor = proveedorService.encontrarProveedor(proveedor);
-        proveedor.setBaja(true);
-        model.addAttribute("proveedor", proveedor);
+    @PostMapping("/eliminarProveedor")
+    public String eliminarProveedor(Proveedor proveedor) {
+        proveedorService.eliminar(proveedor);
         return "redirect:/";
     }
 

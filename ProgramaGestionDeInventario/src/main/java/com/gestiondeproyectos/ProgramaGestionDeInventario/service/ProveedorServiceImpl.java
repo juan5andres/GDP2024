@@ -21,7 +21,7 @@ public class ProveedorServiceImpl implements ProveedorService {
     @Override
     @Transactional
     public List<Proveedor> listarProveedores() {
-        return proveedorDao.findAll();
+        return proveedorDao.listarProveedores();
     }
 
     @Override
@@ -39,12 +39,20 @@ public class ProveedorServiceImpl implements ProveedorService {
     @Override
     @Transactional(readOnly=true)
     public Proveedor encontrarProveedor(Proveedor proveedor) {
-      return proveedorDao.findByIden(proveedor.getIden()); 
+      return proveedorDao.findById(proveedor.getIden()).orElse(null); 
     }
 
     @Override
     @Transactional
     public void guardar(Proveedor proveedor) {
       proveedorDao.save(proveedor);
+    }
+
+    @Override
+    @Transactional
+    public void eliminar(Proveedor proveedor) {
+      Boolean estado = proveedor.getBaja();
+      estado = !estado;
+      proveedorDao.eliminar(estado, proveedor.getIden());
     }
 }

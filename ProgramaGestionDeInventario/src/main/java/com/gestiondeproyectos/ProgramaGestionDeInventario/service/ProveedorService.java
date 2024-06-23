@@ -13,4 +13,6 @@ public interface ProveedorService {
     Proveedor encontrarProveedor(Proveedor proveedor);
 
     void guardar(Proveedor proveedor);
+
+    void eliminar(Proveedor proveedor);
 }
