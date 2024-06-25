@@ -7,9 +7,10 @@
     <style>
         .form-group {
             margin-bottom: 1rem;
+            text-align: center;
         }
         body {
-            background-image: url('/static/media/fondoIndex.AVIF');
+            background-image: url('../static/media/fondoCrear.png');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -28,20 +29,38 @@
         .nav-link {
             text-shadow: 4px 4px 5px rgba(0, 0, 0, 1.2);
         }
+        .square a {
+            display: block;
+            height: 100%;
+            width: 100%;
+            text-decoration: none;
+        }
         .container {
             background-color: rgba(255, 255, 255, 0);
         }
         h1 {
             color: white;
+            margin-bottom: 20px;
         }
         .content {
             margin-top: 50px;
+            margin-bottom: 50px;
             background-color: rgba(0, 0, 0, 0.5);
             padding: 20px;
             border-radius: 10px;
+            width: 60%;
         }
         label {
             color: white;
+        }
+        .form-control {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid #ccc;
+            color: black;
+            border-radius: 5px;
+            width: 50%;
+            margin-left: 25%;
+            margin-right: 25%;
         }
     </style>
 </head>
@@ -50,7 +69,7 @@
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgba(0, 0, 0, 0.5);">
             <a class="navbar-brand text-white font-weight-bold" href="index.html">
-                SVG
+                SGI
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -115,7 +134,9 @@
                 <option value="categoria3">Categoria 3</option>
             </select>
         </div>
-        <button type="submit" class="btn btn-primary">Guardar Proveedor</button>
+        <div class="d-flex justify-content-center align-items-center mt-4">
+            <button type="submit" class="btn btn-primary">Guardar Publicación</button>
+        </div>
     </form>
 </div>
 

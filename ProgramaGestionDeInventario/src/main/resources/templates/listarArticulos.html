@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lista de Artículos</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">
@@ -10,7 +11,7 @@
       margin-bottom: 1rem;
     }
     body {
-      background-image: url('/static/media/fondoIndex.AVIF');
+      background-image: url('../static/media/fondoIndex.AVIF');
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
@@ -35,6 +36,9 @@
     h1 {
       color: white;
     }
+    #articulosTable_info {
+      color: white;
+    }
     .content {
       margin-top: 50px;
       background-color: rgba(0, 0, 0, 0.5);
@@ -44,9 +48,11 @@
     label {
       color: white;
     }
+    
     .table td, .table th {
       color: white;
     }
+    
   </style>
 </head>
 <body>
@@ -54,7 +60,7 @@
   <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgba(0, 0, 0, 0.5);">
       <a class="navbar-brand text-white font-weight-bold" href="index.html">
-        SVG
+        SGI
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -78,7 +84,7 @@
 
 <div class="container content">
   <h1 class="text-center">Lista de Artículos</h1>
-  <table id="articulosTable" class="table table-striped">
+  <table id="articulosTable" class="table table-striped table-dark ">
     <thead>
     <tr>
       <th>Nombre</th>
