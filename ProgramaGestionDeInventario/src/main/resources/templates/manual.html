@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Manual de Usuario</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">
+    <style>
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        body {
+            background-image: url('/static/media/fondoIndex.AVIF');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            backdrop-filter: blur(3px);
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .nav-link {
+            text-shadow: 4px 4px 5px rgba(0, 0, 0, 1.2);
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0);
+        }
+        .square a {
+            display: block;
+            height: 100%;
+            width: 100%;
+            text-decoration: none;
+        }
+        h1, h2, h3, p, li {
+            color: white;
+        }
+        .content {
+            margin-top: 50px;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        label {
+            color: white;
+        }
+        h4{
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<header style="background-color: rgba(255, 255, 255, 0);">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgba(0, 0, 0, 0.5);">
+            <a class="navbar-brand text-white font-weight-bold" href="#">
+                SGI
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link font-weight-bold text-white" href="/reportes">Reportes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link font-weight-bold text-white" href="/facturacion">Facturación</a>
+                    </li>
+                    <li class="nav-item font-weight-bold">
+                        <a class="nav-link text-white" href="/nosotros">Nosotros</a>
+                    </li>
+                    <li class="nav-item font-weight-bold">
+                        <a class="nav-link text-white donar-button" href="/cerrarSesion">Cerrar sesión</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<div class="container content">
+    <h1 class="text-center">Manual de Usuario</h1>
+
+    <h2>Bienvenido al Sistema de Gestión de Stock</h2>
+    <p>Este manual está diseñado para ayudarle a navegar y utilizar el sistema de gestión de stock de manera eficiente. Aquí encontrará información sobre las principales funcionalidades del sistema y cómo resolver posibles problemas.</p>
+
+    <h3>Índice</h3>
+    <ul>
+        <li><a href="#inicio-de-sesión" class="text-white">Inicio de Sesión</a></li>
+        <li><a href="#navegación-principal" class="text-white">Navegación Principal</a></li>
+        <li><a href="#gestión-de-artículos" class="text-white">Gestión de Artículos</a>
+            <ul>
+                <li><a href="#crear-artículo" class="text-white">Crear Artículo</a></li>
+                <li><a href="#ver-lista-de-artículos" class="text-white">Ver Lista de Artículos</a></li>
+                <li><a href="#editar-artículo" class="text-white">Editar Artículo</a></li>
+                <li><a href="#eliminar-artículo" class="text-white">Eliminar Artículo</a></li>
+            </ul>
+        </li>
+        <li><a href="#gestión-de-usuarios" class="text-white">Gestión de Usuarios</a>
+            <ul>
+                <li><a href="#crear-usuario" class="text-white">Crear Usuario</a></li>
+                <li><a href="#ver-lista-de-usuarios" class="text-white">Ver Lista de Usuarios</a></li>
+                <li><a href="#editar-usuario" class="text-white">Editar Usuario</a></li>
+                <li><a href="#eliminar-usuario" class="text-white">Eliminar Usuario</a></li>
+            </ul>
+        </li>
+        <li><a href="#gestión-de-proveedores" class="text-white">Gestión de Proveedores</a>
+            <ul>
+                <li><a href="#crear-preoveedor" class="text-white">Crear Proveedor</a></li>
+                <li><a href="#editar-preoveedor" class="text-white">Editar proveedor</a></li>
+                <li><a href="#eliminar-preoveedor" class="text-white">Eliminar proveedor</a></li>
+                <li><a href="#listar-preoveedor" class="text-white">Listar proveedor</a></li>
+            </ul>
+        </li>
+        <li><a href="#reportes" class="text-white">Reportes</a></li>
+        <li><a href="#cerrar-sesión" class="text-white">Cerrar Sesión</a></li>
+        <li><a href="#resolución-de-problemas-comunes" class="text-white">Resolución de Problemas Comunes</a></li>
+    </ul>
+
+    <h3 id="inicio-de-sesión">Inicio de Sesión</h3>
+    <p>Para acceder al sistema, introduzca su nombre de usuario y contraseña en la página de inicio de sesión y haga clic en el botón "Iniciar Sesión".</p>
+
+    <h3 id="navegación-principal">Navegación Principal</h3>
+    <p>Después de iniciar sesión, será dirigido a la página principal del sistema. Desde aquí, puede acceder a las diferentes secciones usando la barra de navegación superior:</p>
+    <ul>
+        <li><strong>Inicio</strong>: Vuelve a la página principal.</li>
+        <li><strong>Reportes</strong>: Accede a los reportes generados por el sistema.</li>
+        <li><strong>Facturación</strong>: Accede a la sección de facturación.</li>
+        <li><strong>Nosotros</strong>: Información sobre el equipo detrás del sistema.</li>
+        <li><strong>Cerrar Sesión</strong>: Cierra su sesión actual.</li>
+    </ul>
+
+    <h3 id="gestión-de-artículos">Gestión de Artículos</h3>
+    <h4 id="crear-artículo">Crear Artículo</h4>
+    <p>1. Navegue a la sección de "Crear Artículo" desde la página principal.</p>
+    <p>2. Complete el formulario con la información del nuevo artículo (nombre, código, categoría, precio unitario, cantidad mínima, código de depósito, fecha de caducidad y unidad de referencia).</p>
+    <p>3. Haga clic en "Guardar Artículo" para añadir el nuevo artículo al sistema.</p>
+
+    <h4 id="ver-lista-de-artículos">Ver Lista de Artículos</h4>
+    <p>1. Navegue a la sección "Lista de Artículos".</p>
+    <p>2. Aquí verá una tabla con todos los artículos registrados en el sistema, incluyendo detalles como nombre, código, categoría, precio unitario, etc.</p>
+
+    <h4 id="editar-artículo">Editar Artículo</h4>
+    <p>1. Desde la "Lista de Artículos", busque el artículo que desea editar.</p>
+    <p>2. Haga clic en el botón de "Editar" junto al artículo.</p>
+    <p>3. Modifique la información en el formulario y haga clic en "Guardar Cambios".</p>
+
+    <h4 id="eliminar-artículo">Eliminar Artículo</h4>
+    <p>1. Desde la "Lista de Artículos", busque el artículo que desea eliminar.</p>
+    <p>2. Haga clic en el botón de "Eliminar" junto al artículo.</p>
+    <p>3. Confirme la eliminación en la ventana emergente.</p>
+
+    <h3 id="gestión-de-usuarios">Gestión de Usuarios</h3>
+    <h4 id="crear-usuario">Crear Usuario</h4>
+    <p>1. Navegue a la sección de "Crear Usuario" desde la página principal.</p>
+    <p>2. Complete el formulario con la información del nuevo usuario (nombre, email, teléfono, domicilio, rol).</p>
+    <p>3. Haga clic en "Guardar Usuario" para añadir el nuevo usuario al sistema.</p>
+
+    <h4 id="ver-lista-de-usuarios">Ver Lista de Usuarios</h4>
+    <p>1. Navegue a la sección "Lista de Usuarios".</p>
+    <p>2. Aquí verá una tabla con todos los usuarios registrados en el sistema.</p>
+
+    <h4 id="editar-usuario">Editar Usuario</h4>
+    <p>1. Desde la "Lista de Usuarios", busque el usuario que desea editar.</p>
+    <p>2. Haga clic en el botón de "Editar" junto al usuario.</p>
+    <p>3. Modifique la información en el formulario y haga clic en "Guardar Cambios".</p>
+
+    <h4 id="eliminar-usuario">Eliminar Usuario</h4>
+    <p>1. Desde la "Lista de Usuarios", busque el usuario que desea eliminar.</p>
+    <p>2. Haga clic en el botón de "Eliminar" junto al usuario.</p>
+    <p>3. Confirme la eliminación en la ventana emergente.</p>
+
+    <h3 id="gestion-de-proveedores">Gestión de Proveedores</h3>
+    <p>Para gestionar proveedores en el sistema, siga estos pasos:</p>
+        <h4 id="crear-preoveedor">Crear proveedor</h4>
+        <p> Vaya a la sección "Crear Nuevo Proveedor". Complete el formulario con la información requerida del proveedor y haga clic en "Guardar Proveedor".</p>
+        <h4 id="editar-preoveedor">Editar proveedor</h4>
+        <p>Desde la "Lista de Proveedores", busque el proveedor que desea editar y haga clic en el botón "Editar". Modifique la información necesaria y luego presione "Guardar Cambios" </p>
+        <h4 id="eliminar-preoveedor">Eliminar proveedor</h4>
+        <p> En la "Lista de Proveedores", localice el proveedor que desea eliminar y haga clic en "Eliminar". Confirme la acción en la ventana emergente para completar la eliminación del proveedor</p>
+        <h4 id="listar-preoveedor">Listar proveedor</h4>
+        <p>Acceda a la sección "Lista de Proveedores" para ver todos los proveedores registrados en el sistema, junto con su información detallada. </p>
+
+    <h3 id="reportes">Reportes</h3>
+    <p>1. Navegue a la sección de "Reportes" para ver y generar informes sobre el stock y otras métricas importantes.</p>
+    <p>2. Seleccione el tipo de reporte que desea ver y el período de tiempo.</p>
+    <p>3. Haga clic en "Generar Reporte" para ver el informe.</p>
+
+    <h3 id="cerrar-sesión">Cerrar Sesión</h3>
+    <p>Para salir del sistema, haga clic en "Cerrar Sesión" en la barra de navegación superior. Confirme su decisión en la ventana emergente.</p>
+
+    <h3 id="resolución-de-problemas-comunes">Resolución de Problemas Comunes</h3>
+    <ul>
+        <li><strong>No puedo iniciar sesión</strong>: Asegúrese de que su nombre de usuario y contraseña son correctos. Si ha olvidado su contraseña, contacte al administrador del sistema para restablecerla.</li>
+        <li><strong>No puedo encontrar un artículo/usuario</strong>: Use la barra de búsqueda en la "Lista de Artículos" o "Lista de Usuarios" para localizar rápidamente lo que necesita.</li>
+        <li><strong>No puedo guardar cambios</strong>: Verifique que ha completado todos los campos requeridos del formulario correctamente antes de guardar.</li>
+        <li><strong>Error al generar reportes</strong>: Asegúrese de seleccionar un período de tiempo válido y que haya datos disponibles para ese período.</li>
+    </ul>
+
+    <p>Para más asistencia, por favor contacte a nuestro equipo de soporte técnico.</p>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#articulosTable').DataTable({
+            "order": [[0, "asc"]]
+        });
+    });
+</script>
+
+</body>
+</html>
