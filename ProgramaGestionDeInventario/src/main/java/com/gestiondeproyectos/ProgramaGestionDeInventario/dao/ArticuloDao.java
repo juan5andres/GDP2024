@@ -19,7 +19,11 @@ public interface ArticuloDao extends JpaRepository<Articulo, Long> {
            "ORDER BY a.nombre ASC", nativeQuery = true)
     List<Articulo> listItemsByCategoryDescription(String keyword);
 
-
+    @Query(value = "SELECT a.*, c.descripcion, (a.stock * a.precio_unitario) AS precio_Total FROM articulo a " +
+            "JOIN categoriaporarticulo cpa ON a.iden = cpa.articulo_iden " +
+            "JOIN categoria c ON cpa.categoria_iden = c.iden " +
+            "ORDER BY a.nombre ASC", nativeQuery = true)
+    List<Articulo> listItems();
 
     
 }

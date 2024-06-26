@@ -1,8 +1,11 @@
 package com.gestiondeproyectos.ProgramaGestionDeInventario.controller;
 
 import com.gestiondeproyectos.ProgramaGestionDeInventario.model.Articulo;
+import com.gestiondeproyectos.ProgramaGestionDeInventario.model.Proveedor;
 import com.gestiondeproyectos.ProgramaGestionDeInventario.service.ArticuloService;
 import com.gestiondeproyectos.ProgramaGestionDeInventario.service.CategoriaService;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -56,7 +59,7 @@ public class ArticuloController {
 
     @GetMapping("/listarArticulos")
     public String listarArticulos(Model model) {
-        var articulos = articuloService.listarArticulos();
+        List<Articulo> articulos = articuloService.listarArticulos();
         model.addAttribute("articulos", articulos);
         return "listarArticulos";
     }

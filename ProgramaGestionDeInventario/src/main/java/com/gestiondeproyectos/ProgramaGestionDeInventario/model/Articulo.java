@@ -40,6 +40,12 @@ public class Articulo {
     @Column(name = "codigo_Producto", nullable = false)
     private String codigoProducto;
 
+    @Column(name = "descripcion", nullable = false)
+    private String categoria;
+
+    @Column(name = "precio_Total", nullable = false)
+    private double precioTotal;
+
     public Articulo(Long iden, String nombre, int stock, double precioUnitario, Date fechaVencimiento, String unidadDeReferencia, int cantidadMinima, String codigoProducto) {
         this.iden = iden;
         this.nombre = nombre;

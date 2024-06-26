@@ -92,7 +92,6 @@
       <th>Categoría</th>
       <th>Precio Unitario</th>
       <th>Cantidad Mínima</th>
-      <th>Código de Depósito</th>
       <th>Fecha de Caducidad</th>
       <th>Unidad de Referencia</th>
       <th>Cantidad</th>
@@ -106,10 +105,9 @@
       <td th:text="${articulo.categoria}">Categoría</td>
       <td th:text="${articulo.precioUnitario}">Precio Unitario</td>
       <td th:text="${articulo.cantidadMinima}">Cantidad Mínima</td>
-      <td th:text="${articulo.codigoDeposito}">Código de Depósito</td>
       <td th:text="${articulo.fechaVencimiento}">Fecha de Caducidad</td>
       <td th:text="${articulo.unidadDeReferencia}">Unidad de Referencia</td>
-      <td th:text="${articulo.cantidad}">Cantidad</td>
+      <td th:text="${articulo.stock}">Cantidad</td>
       <td th:text="${articulo.precioTotal}">Precio Total</td>
     </tr>
     </tbody>
@@ -122,7 +120,14 @@
 <script>
   $(document).ready(function() {
     $('#articulosTable').DataTable({
-      "order": [[0, "asc"]]
+      "paging": true,
+      "searching": true,
+      "lengthChange": true,
+      "info": true,
+      "pageLength": 10,
+      "language": {
+        "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
+      }
     });
   });
 </script>
