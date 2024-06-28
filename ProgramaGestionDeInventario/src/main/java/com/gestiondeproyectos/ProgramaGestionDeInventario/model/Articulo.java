@@ -40,14 +40,15 @@ public class Articulo {
     @Column(name = "codigo_Producto", nullable = false)
     private String codigoProducto;
 
-    @Column(name = "descripcion", nullable = false)
-    private String categoria;
+    @ManyToOne
+    @JoinColumn(name = "categoria_id", nullable = false)
+    private Categoria categoria;
 
     @Column(name = "precio_Total", nullable = false)
     private double precioTotal;
 
-    public Articulo(Long iden, String nombre, int stock, double precioUnitario, Date fechaVencimiento, String unidadDeReferencia, int cantidadMinima, String codigoProducto) {
-        this.iden = iden;
+
+    public Articulo(String nombre, int stock, double precioUnitario, Date fechaVencimiento, String unidadDeReferencia, int cantidadMinima, String codigoProducto, Categoria categoria) {
         this.nombre = nombre;
         this.stock = stock;
         this.precioUnitario = precioUnitario;
@@ -55,7 +56,92 @@ public class Articulo {
         this.unidadDeReferencia = unidadDeReferencia;
         this.cantidadMinima = cantidadMinima;
         this.codigoProducto = codigoProducto;
+        this.categoria = categoria;
     }
+
     public Articulo() {}
 
+    public Long getIden() {
+        return iden;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Proveedor getProveedor() {
+        return proveedor;
+    }
+
+    public void setProveedor(Proveedor proveedor) {
+        this.proveedor = proveedor;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+    public double getPrecioUnitario() {
+        return precioUnitario;
+    }
+
+    public void setPrecioUnitario(double precioUnitario) {
+        this.precioUnitario = precioUnitario;
+    }
+
+    public Date getFechaVencimiento() {
+        return fechaVencimiento;
+    }
+
+    public void setFechaVencimiento(Date fechaVencimiento) {
+        this.fechaVencimiento = fechaVencimiento;
+    }
+
+    public String getUnidadDeReferencia() {
+        return unidadDeReferencia;
+    }
+
+    public void setUnidadDeReferencia(String unidadDeReferencia) {
+        this.unidadDeReferencia = unidadDeReferencia;
+    }
+
+    public int getCantidadMinima() {
+        return cantidadMinima;
+    }
+
+    public void setCantidadMinima(int cantidadMinima) {
+        this.cantidadMinima = cantidadMinima;
+    }
+
+    public String getCodigoProducto() {
+        return codigoProducto;
+    }
+
+    public void setCodigoProducto(String codigoProducto) {
+        this.codigoProducto = codigoProducto;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
+    public double getPrecioTotal() {
+        return precioTotal;
+    }
+
+    public void setPrecioTotal(double precioTotal) {
+        this.precioTotal = precioTotal;
+    }
 }

@@ -19,4 +19,20 @@ public class Rol {
     public Rol(String descripcion) {
         this.descripcion = descripcion;
     }
+
+    public Long getIden() {
+        return iden;
+    }
+
+    public void setIden(Long iden) {
+        this.iden = iden;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
 }

@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class CategoriaServiceImpl implements CategoriaService{
-    
+
     @Autowired
     private CategoriaDao categoriaDao;
 
@@ -45,7 +45,7 @@ public class CategoriaServiceImpl implements CategoriaService{
         // El .get() devuelve el objeto buscado
         // NOTA: el .get() da error si no encuentra el objeto
         // El .orElse(variablePorDefecto) devuelve la variablePorDefecto si el objeto encontrado no se encuentra
-        return categoriaDao.findById(categoria.getIden()).orElse(null); 
+        return categoriaDao.findById(categoria.getIden()).orElse(null);
     }
 
     @Override
@@ -59,6 +59,10 @@ public class CategoriaServiceImpl implements CategoriaService{
         else{
             return false;
         }
+    }
+    @Override
+    public Categoria obtenerCategoriaPorId(Long id) {
+        return categoriaDao.findById(id).orElse(null);
     }
 
 }

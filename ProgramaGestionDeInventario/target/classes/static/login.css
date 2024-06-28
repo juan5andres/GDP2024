@@ -1,14 +1,35 @@
 .login-page{
     height: 100vh;
     max-height: 100vh;
-    background-image: url("../static/media/fondoLogin.jpg");
+    background-image: url('../static/media/fondoIndex.AVIF');
     top: 0;
     left: 0;
     background-size: cover;
     background-position: center;
+    background-attachment: fixed;
 }
 
 
+.login-form {
+    margin: 0 auto;
+    background-color: rgba(213, 201, 201, 0.8);
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    background-color: rgba(213, 201, 201, 0.8);
+    padding: 5px 0;
+}
 .login-input{
     outline: none;
 }

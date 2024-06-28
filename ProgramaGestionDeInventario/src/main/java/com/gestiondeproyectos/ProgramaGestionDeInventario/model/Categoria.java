@@ -17,10 +17,25 @@ public class Categoria {
     @OneToMany(mappedBy = "categoria")
     private List<CategoriaPorArticulo> categoriasPorArticulo;
 
-    public Categoria(Long iden, String descripcion) {
-        this.iden = iden;
+    public Categoria(String descripcion) {
         this.descripcion = descripcion;
     }
 
     public Categoria() {}
+
+    public Long getIden() {
+        return iden;
+    }
+
+    public void setIden(Long iden) {
+        this.iden = iden;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
 }

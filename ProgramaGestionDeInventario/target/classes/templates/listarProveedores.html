@@ -2,48 +2,100 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lista de Proveedores</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">
   <style>
-        .form-group {
-            margin-bottom: 1rem;
-        }
-    </style>
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    body {
+      background-image: url('../static/media/fondoIndex.AVIF');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      backdrop-filter: blur(3px);
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .nav-link {
+      text-shadow: 4px 4px 5px rgba(0, 0, 0, 1.2);
+    }
+    .container {
+      background-color: rgba(255, 255, 255, 0);
+    }
+    .square a {
+      display: block;
+      height: 100%;
+      width: 100%;
+      text-decoration: none;
+    }
+    #proveedoresTable {
+      color: white;
+      margin-top: 50px;
+    }
+    .dataTables_info,
+    .dataTables_length label {
+      color: white !important;
+    }
+    h1 {
+      color: white;
+    }
+    .content {
+      margin-top: 50px;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      border-radius: 10px;
+    }
+    .dataTables_filter input {
+      background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco semi-transparente */
+      color: black; /* Color del texto negro */
+    }
+
+    .dataTables_filter label {
+      color: white; /* Color del texto del label blanco */
+    }
+
+  </style>
 </head>
-<body>
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<header style="background-color: rgba(255, 255, 255, 0);">
   <div class="container">
-    <a class="navbar-brand" href="index.html">
-      <img src="../static/media/logo.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
-      SVG
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" th:href="@{/adminHome}">Inicio</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" th:href="@{/}">Pagina principal</a>
-        </li>
-      </ul>
-    </div>
-    <form action="#" th:action="@{/login}" th:method="post" class="d-flex">
-      <input class="btn btn-danger form-control me-2" type="submit" value="Cerrar sesión"
-             onclick="return confirm('¿Desea cerrar sesión?');">
-    </form>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgba(0, 0, 0, 0.5);">
+      <a class="navbar-brand text-white font-weight-bold" href="index.html">
+        SGI
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link text-white font-weight-bold" th:href="@{/adminHome}">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white font-weight-bold" th:href="@{/}">Pagina principal</a>
+          </li>
+        </ul>
+      </div>
+      <form action="#" th:action="@{/login}" th:method="post" class="d-flex">
+        <input class="btn btn-danger form-control me-2" type="submit" value="Cerrar sesión" onclick="return confirm('¿Desea cerrar sesión?');">
+      </form>
+    </nav>
   </div>
-</nav>
-
-<div class="container mt-4">
-  <h1>Lista de Proveedores</h1>
-
-  <table id="proveedoresTable" class="table table-striped">
+</header>
+<body>
+<div class="container content">
+  <h1 class="text-center">Lista de Proveedores</h1>
+  <table id="proveedoresTable" class="table table-striped table-dark">
     <thead>
     <tr>
       <th>Nombre</th>
@@ -57,7 +109,6 @@
     </tr>
     </thead>
     <tbody>
-    <!-- Los datos reales se deben llenar usando Thymeleaf en un entorno real -->
     <tr th:each="proveedor : ${proveedores}">
       <td th:text="${proveedor.nombre}">Nombre</td>
       <td th:text="${proveedor.email}">Email</td>
@@ -71,17 +122,22 @@
     </tbody>
   </table>
 </div>
-
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
 <script>
-    $(document).ready(function() {
-        $('#proveedoresTable').DataTable({
-            "order": [[0, "asc"]]
-        });
+  $(document).ready(function() {
+    $('#proveedoresTable').DataTable({
+      "paging": true,
+      "searching": true,
+      "lengthChange": true,
+      "info": true,
+      "pageLength": 10,
+      "language": {
+        "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
+      }
     });
+  });
 </script>
-
 </body>
 </html>

@@ -2,48 +2,102 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lista de Usuarios</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">
   <style>
-        .form-group {
-            margin-bottom: 1rem;
-        }
-    </style>
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    body {
+      background-image: url('../static/media/fondoIndex.AVIF');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      backdrop-filter: blur(3px);
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .nav-link {
+      text-shadow: 4px 4px 5px rgba(0, 0, 0, 1.2);
+    }
+    .container {
+      background-color: rgba(255, 255, 255, 0);
+    }
+    .square a {
+      display: block;
+      height: 100%;
+      width: 100%;
+      text-decoration: none;
+    }
+    #proveedoresTable {
+      color: white;
+      margin-top: 50px;
+    }
+    .dataTables_info,
+    .dataTables_length label {
+      color: white !important;
+    }
+    h1 {
+      color: white;
+    }
+    .content {
+      margin-top: 50px;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      border-radius: 10px;
+    }
+    .dataTables_filter input {
+      background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco semi-transparente */
+      color: black; /* Color del texto negro */
+    }
+
+    .dataTables_filter label {
+      color: white; /* Color del texto del label blanco */
+    }
+
+  </style>
 </head>
+<header style="background-color: rgba(255, 255, 255, 0);">
+  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgba(0, 0, 0, 0.5);">
+      <a class="navbar-brand text-white font-weight-bold" href="index.html">
+        SGI
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link text-white font-weight-bold" th:href="@{/adminHome}">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white font-weight-bold" th:href="@{/}">Pagina principal</a>
+          </li>
+        </ul>
+      </div>
+      <form action="#" th:action="@{/login}" th:method="post" class="d-flex">
+        <input class="btn btn-danger form-control me-2" type="submit" value="Cerrar sesión" onclick="return confirm('¿Desea cerrar sesión?');">
+      </form>
+    </nav>
+  </div>
+</header>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <div class="container">
-    <a class="navbar-brand" href="index.html">
-      <img src="../static/media/logo.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
-      SVG
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" th:href="@{/adminHome}">Inicio</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" th:href="@{/}">Pagina principal</a>
-        </li>
-      </ul>
-    </div>
-    <form action="#" th:action="@{/login}" th:method="post" class="d-flex">
-      <input class="btn btn-danger form-control me-2" type="submit" value="Cerrar sesión"
-             onclick="return confirm('¿Desea cerrar sesión?');">
-    </form>
-  </div>
-</nav>
+<div class="container content">
+  <h1 class="text-center">Lista de Usuarios</h1>
 
-<div class="container mt-4">
-  <h1>Lista de Usuarios</h1>
-
-  <table id="usuariosTable" class="table table-striped">
+  <table id="usuariosTable" class="table table-striped table-dark">
     <thead>
     <tr>
       <th>Nombre</th>

@@ -12,11 +12,11 @@ import com.gestiondeproyectos.ProgramaGestionDeInventario.model.Usuario;
 
 @Controller
 public class UsuarioController {
-    
+
     @Autowired
     private UsuarioService usuarioService;
 
-    @GetMapping("/listaUsuarios")
+    @GetMapping("/listarUsuarios")
     public String listarUsuarios(Model model) {
         List<Usuario> usuarios = usuarioService.listarUsuarios();
         model.addAttribute("usuarios", usuarios);
