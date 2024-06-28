@@ -52,7 +52,7 @@
     .table td, .table th {
       color: white;
     }
-    
+
   </style>
 </head>
 <body>
@@ -101,7 +101,7 @@
     <tbody>
     <tr th:each="articulo : ${articulos}">
       <td th:text="${articulo.nombre}">Nombre</td>
-      <td th:text="${articulo.codigoProducto}">Código</td>
+      <td th:text="${articulo.iden}">Código</td>
       <td th:text="${articulo.categoria}">Categoría</td>
       <td th:text="${articulo.precioUnitario}">Precio Unitario</td>
       <td th:text="${articulo.cantidadMinima}">Cantidad Mínima</td>
@@ -129,7 +129,6 @@
         "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
       }
     });
-  });
 </script>
 
 </body>

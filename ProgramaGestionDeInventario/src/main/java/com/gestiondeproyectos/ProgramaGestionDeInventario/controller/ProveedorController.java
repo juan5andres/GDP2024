@@ -15,10 +15,13 @@ import java.util.List;
 @Controller
 public class ProveedorController {
 
+    @Autowired
     private final ProveedorService proveedorService;
 
+    @Autowired
     private PersonaService personaService;
 
+    @Autowired
     private CategoriaService categoriaService;
 
     @Autowired

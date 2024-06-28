@@ -24,9 +24,6 @@ public class Proveedor {
     @Column(name = "domicilio", nullable = false)
     private String domicilio;
 
-    @Column(name = "persona_de_contacto", nullable = false)
-    private Long personaDeContacto;
-
     @Column(name = "forma_de_pago", nullable = false)
     private String formaDePago;
 
@@ -74,14 +71,6 @@ public class Proveedor {
 
     public void setDomicilio(String domicilio) {
         this.domicilio = domicilio;
-    }
-
-    public Long getPersonaDeContacto() {
-        return personaDeContacto;
-    }
-
-    public void setPersonaDeContacto(Long personaDeContacto) {
-        this.personaDeContacto = personaDeContacto;
     }
 
     public String getFormaDePago() {

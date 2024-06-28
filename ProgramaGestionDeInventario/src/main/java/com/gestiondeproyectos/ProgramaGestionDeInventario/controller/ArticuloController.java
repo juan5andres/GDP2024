@@ -44,12 +44,7 @@ public class ArticuloController {
 
     @PostMapping("/crearArticulo")
     @Transactional
-    public String createArticle(Articulo articulo, @RequestParam(name = "nuevaCategoriaDescripcion", required = false) String nuevaCategoriaDescripcion, @RequestParam(name = "fechaVencimiento") String fechaVencimiento) throws ParseException {
-        // Parse the date string into a Date object
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date parsedDate = dateFormat.parse(fechaVencimiento);
-        articulo.setFechaVencimiento(parsedDate);
-
+    public String createArticle(Articulo articulo, @RequestParam(name = "nuevaCategoriaDescripcion", required = false) String nuevaCategoriaDescripcion) {
         if (nuevaCategoriaDescripcion != null && !nuevaCategoriaDescripcion.isEmpty()) {
             Categoria nuevaCategoria = new Categoria(nuevaCategoriaDescripcion);
             categoriaService.guardar(nuevaCategoria);

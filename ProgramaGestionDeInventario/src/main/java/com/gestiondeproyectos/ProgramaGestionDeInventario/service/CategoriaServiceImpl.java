@@ -31,11 +31,17 @@ public class CategoriaServiceImpl implements CategoriaService{
         categoriaDao.save(categoria);
     }
 
-    @Override
+    /*@Override
     @Transactional
     public void eliminar(Categoria categoria) {
-        categoriaDao.delete(categoria);
-    }
+        if (categoriaNoVinculada(categoria)) {
+            categoriaDao.delete(categoria);
+        } else {
+            throw new IllegalStateException("La categoría está vinculada a artículos o proveedores y no puede ser eliminada.");
+        }
+    }*/
+    @Transactional
+    public void eliminar(Categoria categoria) {categoriaDao.delete(categoria);}
 
     @Override
     // Como solo estamos recorriendo la lista de categorias y no modificamos información va a ser un método de consulta solamente
