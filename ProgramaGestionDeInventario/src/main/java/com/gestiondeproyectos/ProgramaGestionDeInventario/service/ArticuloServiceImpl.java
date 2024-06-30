@@ -20,9 +20,9 @@ public class ArticuloServiceImpl implements ArticuloService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<Articulo> listarArticulos() {
-        return articuloDao.listItems();
+        return articuloDao.findAll();
     }
 
     @Override

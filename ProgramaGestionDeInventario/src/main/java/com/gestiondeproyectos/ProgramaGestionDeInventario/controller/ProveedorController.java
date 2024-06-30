@@ -1,5 +1,6 @@
 package com.gestiondeproyectos.ProgramaGestionDeInventario.controller;
 
+import com.gestiondeproyectos.ProgramaGestionDeInventario.model.Categoria;
 import com.gestiondeproyectos.ProgramaGestionDeInventario.service.CategoriaService;
 import com.gestiondeproyectos.ProgramaGestionDeInventario.service.PersonaService;
 import com.gestiondeproyectos.ProgramaGestionDeInventario.service.ProveedorService;
@@ -19,9 +20,6 @@ public class ProveedorController {
     private final ProveedorService proveedorService;
 
     @Autowired
-    private PersonaService personaService;
-
-    @Autowired
     private CategoriaService categoriaService;
 
     @Autowired
@@ -29,20 +27,26 @@ public class ProveedorController {
         this.proveedorService = proveedorService;
     }
 
-    @GetMapping("/agregarProveedor")
-    public String agregarProveedor(Proveedor proveedor, Model modelPersonas, Model modelCategorias){
-        var personas = personaService.listarPersonas();
-        var categorias = categoriaService.listarCategorias();
-        modelPersonas.addAttribute("personas", personas);
-        modelCategorias.addAttribute("categorias", categorias);
+    @GetMapping("/crearProveedor")
+    public String mostrarFormulario(Model model) {
+        Proveedor proveedor = new Proveedor();
+        proveedor.setBaja(false);
+        model.addAttribute("proveedor", proveedor);
         return "crearProveedor";
+    }
+
+    @PostMapping("/crearProveedor")
+    public String crearProveedor(Proveedor proveedor) {
+        proveedor.setBaja(false);
+        proveedorService.guardar(proveedor);
+        return "redirect:/listarProveedores";
     }
     
     @PostMapping("/guardarProveedor")
     public String guardarProveedor(Proveedor proveedor, Model model){
-        var personas = personaService.listarPersonas();
+        //var personas = personaService.listarPersonas();
         var categorias = categoriaService.listarCategorias();
-        model.addAttribute("personas", personas);
+        //model.addAttribute("personas", personas);
         model.addAttribute("categorias", categorias);
         proveedorService.guardar(proveedor);
         return "redirect:/";
@@ -50,8 +54,8 @@ public class ProveedorController {
 
     @GetMapping("/editarProveedor/{iden}")
     public String editarProveedor(Proveedor proveedor, Model modelProveedor, Model modelPersona, Model modelCategoria) {
-        var personas = personaService.listarPersonas();
-        modelPersona.addAttribute("personas", personas);
+        //var personas = personaService.listarPersonas();
+        //modelPersona.addAttribute("personas", personas);
         var categorias = categoriaService.listarCategorias();
         modelCategoria.addAttribute("categorias", categorias);
         proveedor = proveedorService.encontrarProveedor(proveedor);

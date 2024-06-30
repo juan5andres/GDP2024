@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class PersonaServiceImpl implements PersonaService{
+public abstract class PersonaServiceImpl implements PersonaService{
     
-    @Autowired
+    /*@Autowired
     private PersonaDao personaDao;
 
     @Autowired
@@ -51,6 +51,6 @@ public class PersonaServiceImpl implements PersonaService{
         else{
             return false;
         }
-    }
+    }*/
 
 }

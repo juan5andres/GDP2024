@@ -24,9 +24,6 @@ public class Proveedor {
     @Column(name = "domicilio", nullable = false)
     private String domicilio;
 
-    @Column(name = "forma_de_pago", nullable = false)
-    private String formaDePago;
-
     @Column(name = "cuit", nullable = false)
     private String cuit;
 
@@ -71,14 +68,6 @@ public class Proveedor {
 
     public void setDomicilio(String domicilio) {
         this.domicilio = domicilio;
-    }
-
-    public String getFormaDePago() {
-        return formaDePago;
-    }
-
-    public void setFormaDePago(String formaDePago) {
-        this.formaDePago = formaDePago;
     }
 
     public String getCuit() {

@@ -44,21 +44,6 @@ public class Articulo {
     @JoinColumn(name = "categoria_id", nullable = false)
     private Categoria categoria;
 
-    @Column(name = "precio_Total", nullable = false)
-    private double precioTotal;
-
-
-    public Articulo(String nombre, int stock, double precioUnitario, Date fechaVencimiento, String unidadDeReferencia, int cantidadMinima, String codigoProducto, Categoria categoria) {
-        this.nombre = nombre;
-        this.stock = stock;
-        this.precioUnitario = precioUnitario;
-        this.fechaVencimiento = fechaVencimiento;
-        this.unidadDeReferencia = unidadDeReferencia;
-        this.cantidadMinima = cantidadMinima;
-        this.codigoProducto = codigoProducto;
-        this.categoria = categoria;
-    }
-
     public Articulo() {}
 
     public Long getIden() {
@@ -135,13 +120,5 @@ public class Articulo {
 
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
-    }
-
-    public double getPrecioTotal() {
-        return precioTotal;
-    }
-
-    public void setPrecioTotal(double precioTotal) {
-        this.precioTotal = precioTotal;
     }
 }

@@ -32,12 +32,6 @@ public class ProveedorServiceImpl implements ProveedorService {
 
     @Override
     @Transactional(readOnly=true)
-    public List<Proveedor> searchProvidersByPerson(Long iden) {
-      return proveedorDao.listProvidersByPerson(iden);
-    }
-
-    @Override
-    @Transactional(readOnly=true)
     public Proveedor encontrarProveedor(Proveedor proveedor) {
       return proveedorDao.findById(proveedor.getIden()).orElse(null); 
     }
@@ -56,3 +50,9 @@ public class ProveedorServiceImpl implements ProveedorService {
       proveedorDao.eliminar(estado, proveedor.getIden());
     }
 }
+
+/*@Override
+@Transactional(readOnly=true)
+public List<Proveedor> searchProvidersByPerson(Long iden) {
+    return proveedorDao.listProvidersByPerson(iden);
+}*/

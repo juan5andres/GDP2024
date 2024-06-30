@@ -36,7 +36,7 @@ public class AuthController {
         return "register";
     }
 
-    @PostMapping("/register")
+    /*@PostMapping("/register")
     public String registerUsuario(Usuario user) {
         usuarioService.saveRegularUser(user);
         return "redirect:/login";
@@ -52,5 +52,5 @@ public class AuthController {
     public String registerAdmin(Usuario usuario) {
         usuarioService.saveRegularUser(usuario);
         return "redirect:/admin/dashboard";
-    }
+    }*/
 }

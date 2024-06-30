@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UsuarioService {
-    void saveUser(Usuario user, int roleId);
+    //void saveUser(Usuario user, int roleId);
 
-    void saveAdmin(Usuario user);
-    void saveRegularUser(Usuario user);
+    //void saveAdmin(Usuario user);
+    //void saveRegularUser(Usuario user);
     Optional<Usuario> findByUsername(String username);
-
+    void guardar(Usuario user);
     public List<Usuario> listarUsuarios();
 }
