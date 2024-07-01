@@ -93,49 +93,29 @@
 
 <div class="container content">
     <h1 class="text-center">Crear nuevo proveedor</h1>
-    <form th:action="@{/crearUsuario}" method="post">
+    <form th:action="@{/crearProveedor}" th:object="${proveedor}" method="post">
         <div class="form-group">
             <label for="nombre">Nombre:</label>
-            <input type="text" class="form-control" id="nombre" name="nombre" required maxlength="30">
-        </div>
-        <div class="form-group">
-            <label for="apellido">Apellido:</label>
-            <input type="text" class="form-control" id="apellido" name="apellido" required maxlength="30">
+            <input type="text" class="form-control" id="nombre" th:field="*{nombre}" required maxlength="30">
         </div>
         <div class="form-group">
             <label for="email">Email:</label>
-            <input type="email" class="form-control" id="email" name="email" required maxlength="30">
+            <input type="email" class="form-control" id="email" th:field="*{email}" required maxlength="30">
         </div>
         <div class="form-group">
-            <label for="telefono">Telefono:</label>
-            <input type="tel" class="form-control" id="telefono" name="telefono" required maxlength="30">
+            <label for="telefono">Teléfono:</label>
+            <input type="tel" class="form-control" id="telefono" th:field="*{telefono}" required maxlength="30">
         </div>
         <div class="form-group">
             <label for="domicilio">Domicilio:</label>
-            <input type="text" class="form-control" id="domicilio" name="domicilio" required maxlength="30">
-        </div>
-        <div class="form-group">
-            <label for="contacto">Persona de contacto:</label>
-            <input type="text" class="form-control" id="contacto" name="contacto" required maxlength="30">
-        </div>
-        <div class="form-group">
-            <label for="pago">Forma de pago:</label>
-            <input type="text" class="form-control" id="pago" name="pago" required maxlength="30">
+            <input type="text" class="form-control" id="domicilio" th:field="*{domicilio}" required maxlength="30">
         </div>
         <div class="form-group">
             <label for="cuit">Cuit:</label>
-            <input type="text" class="form-control" id="cuit" name="cuit" required maxlength="30">
-        </div>
-        <div class="form-group">
-            <label for="rol">Categoria:</label>
-            <select class="form-control" id="rol" name="rol" required>
-                <option value="categoria1">Categoria 1</option>
-                <option value="categoria2">Categoria 2</option>
-                <option value="categoria3">Categoria 3</option>
-            </select>
+            <input type="text" class="form-control" id="cuit" th:field="*{cuit}" required maxlength="30">
         </div>
         <div class="d-flex justify-content-center align-items-center mt-4">
-            <button type="submit" class="btn btn-primary">Guardar Publicación</button>
+            <button type="submit" class="btn btn-primary">Guardar Proveedor</button>
         </div>
     </form>
 </div>

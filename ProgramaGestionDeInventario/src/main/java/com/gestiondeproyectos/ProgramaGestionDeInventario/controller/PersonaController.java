@@ -12,14 +12,14 @@ import com.gestiondeproyectos.ProgramaGestionDeInventario.model.Persona;
 @Controller
 public class PersonaController {
 
-    @Autowired
+    /*@Autowired
     private PersonaService personaService;
 
     @GetMapping("/agregarPersona")
     public String agregarPersona(Persona persona){
         return "modificarPersona";
     }
-    
+
     @PostMapping("/guardarPersona")
     public String guardarPersona(Persona persona){
         personaService.guardar(persona);
@@ -49,6 +49,6 @@ public class PersonaController {
         var personas = personaService.listarPersonas();
         model.addAttribute("personas", personas);
         return "listarPersonas";
-    }
+    }*/
 
 }

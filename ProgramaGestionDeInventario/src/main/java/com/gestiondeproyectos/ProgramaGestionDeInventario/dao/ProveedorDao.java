@@ -20,13 +20,12 @@ public interface ProveedorDao extends JpaRepository<Proveedor, Long> {
     "ORDER BY p.nombre ASC", nativeQuery=true)
     List<Proveedor> listarProveedores();
 
-    @Query(value = "SELECT * FROM proveedor p " +
-    "WHERE p.persona_de_contacto = ?1", nativeQuery = true)
-    List<Proveedor> listProvidersByPerson(Long iden);
-
     Proveedor findByIden(Long iden);
 
     @Query(value = "UPDATE proveedor SET baja = ?1 WHERE iden = ?2", nativeQuery=true)
     void eliminar(Boolean estado, Long iden);
-    
+
 }
+/*@Query(value = "SELECT * FROM proveedor p " +
+        "WHERE p.persona_de_contacto = ?1", nativeQuery = true)
+List<Proveedor> listProvidersByPerson(Long iden);*/

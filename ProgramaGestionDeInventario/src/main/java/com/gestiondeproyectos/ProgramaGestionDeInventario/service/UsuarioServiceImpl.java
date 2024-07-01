@@ -24,7 +24,8 @@ public class UsuarioServiceImpl implements UsuarioService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @Override
+
+    /*@Override
     public void saveUser(Usuario user, int roleId) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRol(rolDao.findRolByIden(roleId));
@@ -39,11 +40,17 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public void saveRegularUser(Usuario user) {
         saveUser(user, 2);
-    }
+    }*/
 
     @Override
     public Optional<Usuario> findByUsername(String username) {
         return Optional.ofNullable(usuarioDao.findByNombre(username));
+    }
+
+    @Override
+    public void guardar(Usuario user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        usuarioDao.save(user);
     }
 
     @Override

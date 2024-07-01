@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import com.gestiondeproyectos.ProgramaGestionDeInventario.service.ProveedorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,33 +30,30 @@ public class ArticuloController {
     private CategoriaService categoriaService;
 
     @Autowired
+    private ProveedorService proveedorService;
+
+    @Autowired
     public ArticuloController(ArticuloService articuloService) {
         this.articuloService = articuloService;
     }
 
 
     @GetMapping("/crearArticulo")
-    public String showCreateArticleForm(Model model) {
+    public String mostrarFormularioCrearArticulo(Model model) {
         List<Categoria> categorias = categoriaService.listarCategorias();
+        List<Proveedor> proveedores = proveedorService.listarProveedores();
         model.addAttribute("categorias", categorias);
+        model.addAttribute("proveedores", proveedores);
         model.addAttribute("articulo", new Articulo());
         return "crearArticulo";
     }
 
     @PostMapping("/crearArticulo")
-    @Transactional
-    public String createArticle(Articulo articulo, @RequestParam(name = "nuevaCategoriaDescripcion", required = false) String nuevaCategoriaDescripcion) {
-        if (nuevaCategoriaDescripcion != null && !nuevaCategoriaDescripcion.isEmpty()) {
-            Categoria nuevaCategoria = new Categoria(nuevaCategoriaDescripcion);
-            categoriaService.guardar(nuevaCategoria);
-            articulo.setCategoria(nuevaCategoria);
-        } else {
-            articulo.setCategoria(categoriaService.obtenerCategoriaPorId(articulo.getCategoria().getIden()));
-        }
-
+    public String guardarArticulo(Articulo articulo) {
         articuloService.guardar(articulo);
-        return "redirect:/crearArticulo";
+        return "redirect:/listarArticulos";
     }
+
     /*@GetMapping("/agregarArticulo")
     public String agregarArticulo(Articulo articulo, Model modelCategorias){
         var categorias = categoriaService.listarCategorias();

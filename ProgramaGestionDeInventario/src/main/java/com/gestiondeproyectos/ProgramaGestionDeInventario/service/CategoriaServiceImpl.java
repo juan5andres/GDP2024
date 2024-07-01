@@ -31,6 +31,11 @@ public class CategoriaServiceImpl implements CategoriaService{
         categoriaDao.save(categoria);
     }
 
+    @Autowired
+    public CategoriaServiceImpl(CategoriaDao categoriaDao) {
+        this.categoriaDao = categoriaDao;
+    }
+
     /*@Override
     @Transactional
     public void eliminar(Categoria categoria) {

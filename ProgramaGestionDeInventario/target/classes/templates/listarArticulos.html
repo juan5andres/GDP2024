@@ -84,31 +84,31 @@
 
 <div class="container content">
   <h1 class="text-center">Lista de Artículos</h1>
-  <table id="articulosTable" class="table table-striped table-dark ">
+  <table id="articulosTable" class="table table-striped table-dark">
     <thead>
     <tr>
-      <th>Nombre</th>
       <th>Código</th>
+      <th>Nombre</th>
       <th>Categoría</th>
+      <th>Proveedor</th>
       <th>Precio Unitario</th>
       <th>Cantidad Mínima</th>
+      <th>Stock</th>
       <th>Fecha de Caducidad</th>
       <th>Unidad de Referencia</th>
-      <th>Cantidad</th>
-      <th>Precio Total</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="articulo : ${articulos}">
+      <td th:text="${articulo.codigoProducto}">Código</td>
       <td th:text="${articulo.nombre}">Nombre</td>
-      <td th:text="${articulo.iden}">Código</td>
-      <td th:text="${articulo.categoria}">Categoría</td>
+      <td th:text="${articulo.categoria.descripcion}">Categoría</td>
+      <td th:text="${articulo.proveedor.nombre}">Proveedor</td>
       <td th:text="${articulo.precioUnitario}">Precio Unitario</td>
       <td th:text="${articulo.cantidadMinima}">Cantidad Mínima</td>
-      <td th:text="${articulo.fechaVencimiento}">Fecha de Caducidad</td>
+      <td th:text="${articulo.stock}">Stock</td>
+      <td th:text="${#dates.format(articulo.fechaVencimiento, 'dd/MM/yyyy')}">Fecha de Caducidad</td>
       <td th:text="${articulo.unidadDeReferencia}">Unidad de Referencia</td>
-      <td th:text="${articulo.stock}">Cantidad</td>
-      <td th:text="${articulo.precioTotal}">Precio Total</td>
     </tr>
     </tbody>
   </table>
@@ -129,6 +129,7 @@
         "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
       }
     });
+  });
 </script>
 
 </body>
