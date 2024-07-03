@@ -57,4 +57,12 @@ public class UsuarioServiceImpl implements UsuarioService {
     public List<Usuario> listarUsuarios(){
         return usuarioDao.listarUsuarios();
     }
+    public Usuario findByEmail(String email) {
+        return usuarioDao.findByEmail(email);
+    }
+
+    @Override
+    public void updatePassword(String updatedPassword, Long iden) {
+        usuarioDao.updatePassword(updatedPassword, iden);
+    }
 }

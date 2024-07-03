@@ -13,4 +13,6 @@ public interface UsuarioService {
     Optional<Usuario> findByUsername(String username);
     void guardar(Usuario user);
     public List<Usuario> listarUsuarios();
+    public Usuario findByEmail(String email);
+    void updatePassword(String updatedPassword, Long iden);
 }
