@@ -1,12 +1,7 @@
 package com.gestiondeproyectos.ProgramaGestionDeInventario.service;
-import com.gestiondeproyectos.ProgramaGestionDeInventario.dao.PersonaDao;
-import com.gestiondeproyectos.ProgramaGestionDeInventario.model.Persona;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
 
 @Service
 public abstract class PersonaServiceImpl implements PersonaService{

@@ -1,8 +1,6 @@
 package com.gestiondeproyectos.ProgramaGestionDeInventario.controller;
 
-import com.gestiondeproyectos.ProgramaGestionDeInventario.model.Categoria;
 import com.gestiondeproyectos.ProgramaGestionDeInventario.service.CategoriaService;
-import com.gestiondeproyectos.ProgramaGestionDeInventario.service.PersonaService;
 import com.gestiondeproyectos.ProgramaGestionDeInventario.service.ProveedorService;
 import com.gestiondeproyectos.ProgramaGestionDeInventario.model.Proveedor;
 import org.springframework.beans.factory.annotation.Autowired;
