@@ -67,4 +67,15 @@ public class ArticuloServiceImpl implements ArticuloService {
     public void eliminar(Articulo articulo) {
         articuloDao.delete(articulo);
     }  
+
+    public List<Articulo> listarArticulosVencidosOPorVencer() {
+        var listadoArticulos = listarArticulos();
+        List<Articulo> articulosVencidosOPorVencer = new ArrayList<Articulo>();
+        for (Articulo a : listadoArticulos) {
+            if(a.isFechaVencida() || a.isFechaProxima()){
+                articulosVencidosOPorVencer.add(a);
+            }
+        }
+        return articulosVencidosOPorVencer;
+    }
 }

@@ -1,18 +1,18 @@
 package com.gestiondeproyectos.ProgramaGestionDeInventario.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.time.temporal.ChronoUnit;
 import java.util.Date;
-import java.time.LocalDate.*;
-import java.util.Date.*;
 
 @Data
 @Entity
 @Table(name = "articulo")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Articulo {
 
     @Id
@@ -24,6 +24,7 @@ public class Articulo {
 
     @ManyToOne
     @JoinColumn(name = "proveedor_id", nullable = false)
+    @JsonBackReference
     private Proveedor proveedor;
 
     @Column(name = "stock", nullable = false)
@@ -47,6 +48,7 @@ public class Articulo {
 
     @ManyToOne
     @JoinColumn(name = "categoria_id", nullable = false)
+    @JsonBackReference
     private Categoria categoria;
 
     public Articulo() {}
