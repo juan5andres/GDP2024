@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
   <style>
     .form-group {
       margin-bottom: 1rem;
@@ -90,9 +90,10 @@
 
   <div class="mb-3 d-flex">
     <a th:href="@{/crearArticulo}" class="btn btn-primary mr-2">Crear Artículo</a>
-    <button id="exportarPdf" class="btn btn-primary">Exportar a PDF</button>
+    <button id="exportarPdf" class="btn btn-primary mr-2">Exportar a PDF</button>
     <a th:href="@{/listarCategorias}" class="btn btn-primary mr-2">Categorías</a>
   </div>
+
 
   <div class="mb-3 d-flex">
     <label class="mr-2" for="searchColumn">Buscar en:</label>
@@ -101,15 +102,16 @@
       <option value="1">Nombre</option>
       <option value="2">Categoría</option>
       <option value="3">Proveedor</option>
-      <option value="4">Fecha de Caducidad</option>
-      <option value="5">Estado del Stock</option>
+      <option value="7">Fecha de Caducidad</option>
+      <option value="6">Estado del Stock</option>
     </select>
     <input type="text" id="searchText" class="form-control" placeholder="Buscar">
-    <input type="text" id="datepicker" class="form-control" placeholder="Buscar por Fecha" style="display:none;">
-    <select id="stockStatus" class="form-control" >
-      <option value="low">Stock bajo o igual a la cantidad mínima</option>
-      <option value="medium">Stock 10 unidades o menos por encima de la cantidad mínima</option>
-      <option value="both">Ambos</option>
+    <input type="text" id="searchDate" class="form-control" placeholder="Seleccione una fecha" style="display:none;">
+    <select id="stockStatus" class="form-control mr-2" style="display:none;">
+      <option value="">Seleccione estado del stock</option>
+      <option value="low">Stock igual o menor a la cantidad mínima</option>
+      <option value="medium">Stock de solo 10 o menos más que la cantidad mínima</option>
+      <option value="all">Ambos</option>
     </select>
   </div>
 
@@ -152,12 +154,11 @@
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 
 <script>
   $(document).ready(function() {
@@ -172,28 +173,46 @@
       }
     });
 
-    // Inicialización del selector de fecha
-    $('#datepicker').datepicker({
-      format: 'dd/mm/yyyy',
-      autoclose: true,
-      todayHighlight: true
+    // Inicializar el selector de fecha
+    $('#searchDate').datepicker({
+      dateFormat: 'dd/mm/yy'
     });
+
+    // Función para resetear los filtros personalizados
+    function resetCustomFilters() {
+      $.fn.dataTable.ext.search = $.grep($.fn.dataTable.ext.search, function(value) {
+        return value != customFilterFunction;
+      });
+    }
+
+    // Función de filtro personalizada
+    var customFilterFunction = function(settings, data, dataIndex) {
+      var cantidadMinima = parseFloat(data[5]) || 0;
+      var stock = parseFloat(data[6]) || 0;
+      var value = $('#stockStatus').val();
+      if (value == 'low' && stock <= cantidadMinima) {
+        return true;
+      } else if (value == 'medium' && stock > cantidadMinima && stock <= cantidadMinima + 10) {
+        return true;
+      } else if (value == 'all' && (stock <= cantidadMinima || (stock > cantidadMinima && stock <= cantidadMinima + 10))) {
+        return true;
+      } else if (value == '') {
+        return true;
+      }
+      return false;
+    };
 
     // Cambiar la entrada de búsqueda según la columna seleccionada
     $('#searchColumn').on('change', function() {
-      var column = $(this).val();
-      $('#searchText').val('');
-      $('#datepicker').val('');
+      $('#searchText').val('').hide();
+      $('#searchDate').val('').hide();
       $('#stockStatus').val('').hide();
-      if (column == 4) { // Fecha de Caducidad
-        $('#searchText').hide();
-        $('#datepicker').show();
-      } else if (column == 5) { // Estado del Stock
-        $('#searchText').hide();
-        $('#datepicker').hide();
+      var column = $(this).val();
+      if (column == 7) { // Fecha de Caducidad
+        $('#searchDate').show();
+      } else if (column == 6) { // Estado del Stock
         $('#stockStatus').show();
       } else {
-        $('#datepicker').hide();
         $('#searchText').show();
       }
       table.columns().search('').draw();
@@ -202,29 +221,20 @@
     // Aplicar búsqueda por texto
     $('#searchText').on('keyup', function() {
       var column = $('#searchColumn').val();
-      table.column().search(this.value).draw();
+      table.column(column).search(this.value).draw();
     });
 
     // Aplicar búsqueda por fecha
-    $('#datepicker').on('changeDate', function() {
+    $('#searchDate').on('change', function() {
       var column = $('#searchColumn').val();
-      var dateValue = moment(this.value, 'DD/MM/YYYY').format('DD/MM/YYYY');
-      table.column(column).search(dateValue).draw();
+      table.column(column).search(this.value).draw();
     });
 
-    // Aplicar búsqueda por estado del stock
+    // Filtrar por estado del stock
     $('#stockStatus').on('change', function() {
-      var value = $(this).val();
-      var filter = '';
-      var column = $('#searchColumn').val();
-      if (value === 'low') {
-        filter = 'low-stock';
-      } else if (value === 'medium') {
-        filter = 'medium-stock';
-      } else if (value === 'both') {
-        filter = 'low-stock|medium-stock';
-      }
-      table.column(column).search(filter, true, false).draw();
+      resetCustomFilters();
+      $.fn.dataTable.ext.search.push(customFilterFunction);
+      table.draw();
     });
 
     // Exportar a PDF
