@@ -11,7 +11,7 @@
         }
 
         body {
-            background-image: url('../static/media/fondoCrear.png');
+            background-image: url('/media/fondoCrear.png');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -78,21 +78,13 @@
 <header style="background-color: rgba(255, 255, 255, 0);">
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgba(0, 0, 0, 0.5);">
-            <a class="navbar-brand text-white font-weight-bold" href="index.html">
+            <a class="navbar-brand text-white font-weight-bold" href="index">
                 SGI
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link text-white font-weight-bold" th:href="@{/adminHome}">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white font-weight-bold" th:href="@{/}">Pagina principal</a>
-                    </li>
-                </ul>
             </div>
             <form action="#" th:action="@{/login}" th:method="post" class="d-flex">
                 <input class="btn btn-danger form-control me-2" type="submit" value="Cerrar sesión" onclick="return confirm('¿Desea cerrar sesión?');">
