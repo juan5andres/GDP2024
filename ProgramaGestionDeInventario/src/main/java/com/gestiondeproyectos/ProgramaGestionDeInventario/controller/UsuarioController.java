@@ -6,6 +6,7 @@ import java.util.List;
 import com.gestiondeproyectos.ProgramaGestionDeInventario.model.*;
 import com.gestiondeproyectos.ProgramaGestionDeInventario.service.RolService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,6 +43,18 @@ public class UsuarioController {
         usuarioService.guardar(usuario);
         return "redirect:/listarUsuarios";
     }*/
+        
+    @GetMapping("/crearUsuarioConPermisos")
+    public String crearUsuario(Model model, Authentication authentication){
+        Usuario sessionUser =(Usuario) authentication.getPrincipal();
+        if(sessionUser.getRol().getDescripcion().equals("Usuario")){
+            return "redirect:/listarUsuarios";
+        }
+        List<RolEnum> roles = Arrays.asList(RolEnum.values());
+        model.addAttribute("roles", roles);
+        model.addAttribute("usuario", new Usuario());
+        return "crearUsuario";
+    }
 
     @GetMapping("/crearUsuario")
     public String crearUsuario(Model model){
