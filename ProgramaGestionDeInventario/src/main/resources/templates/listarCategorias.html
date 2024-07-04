@@ -74,6 +74,9 @@
 
 <div class="container content">
     <h1 class="text-center">Lista de Categorías</h1>
+    <div class="mb-3">
+        <a th:href="@{/agregarCategoria}" class="btn btn-primary">Agregar Categoría</a>
+    </div>
     <div th:if="${param.error}">
         <div class="alert alert-danger" role="alert" th:text="${param.error}"></div>
     </div>
@@ -96,9 +99,6 @@
         </tr>
         </tbody>
     </table>
-    <div class="d-flex justify-content-center align-items-center mt-4">
-        <a th:href="@{/agregarCategoria}" class="btn btn-success">Agregar Categoría</a>
-    </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

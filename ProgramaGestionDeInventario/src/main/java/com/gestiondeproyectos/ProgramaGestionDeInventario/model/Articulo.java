@@ -3,7 +3,12 @@ package com.gestiondeproyectos.ProgramaGestionDeInventario.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
+import java.time.LocalDate.*;
+import java.util.Date.*;
 
 @Data
 @Entity
@@ -120,5 +125,17 @@ public class Articulo {
 
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
+    }
+
+    public boolean isFechaVencida() {
+        java.util.Date fechaUtil = new java.util.Date(this.fechaVencimiento.getTime());
+        LocalDate localDate = fechaUtil.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        return localDate.isBefore(LocalDate.now());
+    }
+
+    public boolean isFechaProxima() {
+        java.util.Date fechaUtil = new java.util.Date(this.fechaVencimiento.getTime());
+        LocalDate localDate = fechaUtil.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        return localDate.isBefore(LocalDate.now().plusMonths(1)) && !isFechaVencida();
     }
 }

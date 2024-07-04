@@ -6,12 +6,14 @@
   <title>Lista de Artículos</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
   <style>
     .form-group {
       margin-bottom: 1rem;
     }
     body {
-      background-image: url('../static/media/fondoIndex.AVIF');
+      background-image: url('/media/fondoIndex.AVIF');
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
@@ -48,34 +50,35 @@
     label {
       color: white;
     }
-    
     .table td, .table th {
       color: white;
     }
-
+    .low-stock {
+      color: red;
+      font-weight: bold;
+    }
+    .medium-stock {
+      color: yellow;
+      font-weight: bold;
+    }
+    .icon-exclamation {
+      margin-left: 5px;
+    }
   </style>
 </head>
 <body>
 <header style="background-color: rgba(255, 255, 255, 0);">
   <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgba(0, 0, 0, 0.5);">
-      <a class="navbar-brand text-white font-weight-bold" href="index.html">
+      <a class="navbar-brand text-white font-weight-bold" href="index">
         SGI
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link text-white font-weight-bold" th:href="@{/adminHome}">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-white font-weight-bold" th:href="@{/}">Pagina principal</a>
-          </li>
-        </ul>
       </div>
-      <form action="#" th:action="@{/login}" th:method="post" class="d-flex">
+      <form action="#" th:action="@{/logout}" th:method="post" class="d-flex">
         <input class="btn btn-danger form-control me-2" type="submit" value="Cerrar sesión" onclick="return confirm('¿Desea cerrar sesión?');">
       </form>
     </nav>
@@ -84,6 +87,32 @@
 
 <div class="container content">
   <h1 class="text-center">Lista de Artículos</h1>
+
+  <div class="mb-3 d-flex">
+    <a th:href="@{/crearArticulo}" class="btn btn-primary mr-2">Crear Artículo</a>
+    <button id="exportarPdf" class="btn btn-primary">Exportar a PDF</button>
+    <a th:href="@{/listarCategorias}" class="btn btn-primary mr-2">Categorías</a>
+  </div>
+
+  <div class="mb-3 d-flex">
+    <label class="mr-2" for="searchColumn">Buscar en:</label>
+    <select id="searchColumn" class="form-control mr-2">
+      <option value="0">Código</option>
+      <option value="1">Nombre</option>
+      <option value="2">Categoría</option>
+      <option value="3">Proveedor</option>
+      <option value="4">Fecha de Caducidad</option>
+      <option value="5">Estado del Stock</option>
+    </select>
+    <input type="text" id="searchText" class="form-control" placeholder="Buscar">
+    <input type="text" id="datepicker" class="form-control" placeholder="Buscar por Fecha" style="display:none;">
+    <select id="stockStatus" class="form-control" >
+      <option value="low">Stock bajo o igual a la cantidad mínima</option>
+      <option value="medium">Stock 10 unidades o menos por encima de la cantidad mínima</option>
+      <option value="both">Ambos</option>
+    </select>
+  </div>
+
   <table id="articulosTable" class="table table-striped table-dark">
     <thead>
     <tr>
@@ -106,8 +135,16 @@
       <td th:text="${articulo.proveedor.nombre}">Proveedor</td>
       <td th:text="${articulo.precioUnitario}">Precio Unitario</td>
       <td th:text="${articulo.cantidadMinima}">Cantidad Mínima</td>
-      <td th:text="${articulo.stock}">Stock</td>
-      <td th:text="${#dates.format(articulo.fechaVencimiento, 'dd/MM/yyyy')}">Fecha de Caducidad</td>
+      <td>
+        <span th:text="${articulo.stock}" th:classappend="${articulo.stock <= articulo.cantidadMinima} ? 'low-stock' : (${articulo.stock > articulo.cantidadMinima && articulo.stock <= (articulo.cantidadMinima + 10)} ? 'medium-stock' : '')"></span>
+        <i class="fas fa-exclamation-circle icon-exclamation" th:if="${articulo.stock <= articulo.cantidadMinima}" style="color: red;"></i>
+        <i class="fas fa-exclamation-circle icon-exclamation" th:if="${articulo.stock > articulo.cantidadMinima && articulo.stock <= (articulo.cantidadMinima + 10)}" style="color: yellow;"></i>
+      </td>
+      <td>
+        <span th:text="${#dates.format(articulo.fechaVencimiento, 'dd/MM/yyyy')}" th:classappend="${articulo.fechaVencida} ? 'low-stock' : (${articulo.fechaProxima} ? 'medium-stock' : '')"></span>
+        <i class="fas fa-exclamation-circle icon-exclamation" th:if="${articulo.fechaVencida}" style="color: red;"></i>
+        <i class="fas fa-exclamation-circle icon-exclamation" th:if="${articulo.fechaProxima && !articulo.fechaVencida}" style="color: yellow;"></i>
+      </td>
       <td th:text="${articulo.unidadDeReferencia}">Unidad de Referencia</td>
     </tr>
     </tbody>
@@ -117,9 +154,14 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
 <script>
   $(document).ready(function() {
-    $('#articulosTable').DataTable({
+    var table = $('#articulosTable').DataTable({
       "paging": true,
       "searching": true,
       "lengthChange": true,
@@ -128,6 +170,69 @@
       "language": {
         "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
       }
+    });
+
+    // Inicialización del selector de fecha
+    $('#datepicker').datepicker({
+      format: 'dd/mm/yyyy',
+      autoclose: true,
+      todayHighlight: true
+    });
+
+    // Cambiar la entrada de búsqueda según la columna seleccionada
+    $('#searchColumn').on('change', function() {
+      var column = $(this).val();
+      $('#searchText').val('');
+      $('#datepicker').val('');
+      $('#stockStatus').val('').hide();
+      if (column == 4) { // Fecha de Caducidad
+        $('#searchText').hide();
+        $('#datepicker').show();
+      } else if (column == 5) { // Estado del Stock
+        $('#searchText').hide();
+        $('#datepicker').hide();
+        $('#stockStatus').show();
+      } else {
+        $('#datepicker').hide();
+        $('#searchText').show();
+      }
+      table.columns().search('').draw();
+    });
+
+    // Aplicar búsqueda por texto
+    $('#searchText').on('keyup', function() {
+      var column = $('#searchColumn').val();
+      table.column().search(this.value).draw();
+    });
+
+    // Aplicar búsqueda por fecha
+    $('#datepicker').on('changeDate', function() {
+      var column = $('#searchColumn').val();
+      var dateValue = moment(this.value, 'DD/MM/YYYY').format('DD/MM/YYYY');
+      table.column(column).search(dateValue).draw();
+    });
+
+    // Aplicar búsqueda por estado del stock
+    $('#stockStatus').on('change', function() {
+      var value = $(this).val();
+      var filter = '';
+      var column = $('#searchColumn').val();
+      if (value === 'low') {
+        filter = 'low-stock';
+      } else if (value === 'medium') {
+        filter = 'medium-stock';
+      } else if (value === 'both') {
+        filter = 'low-stock|medium-stock';
+      }
+      table.column(column).search(filter, true, false).draw();
+    });
+
+    // Exportar a PDF
+    $('#exportarPdf').on('click', function() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      doc.autoTable({ html: '#articulosTable' });
+      doc.save('articulos.pdf');
     });
   });
 </script>
