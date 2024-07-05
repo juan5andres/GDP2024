@@ -12,6 +12,7 @@ import java.util.List;
 @Service
 public class ArticuloServiceImpl implements ArticuloService {
 
+    @Autowired
     private final ArticuloDao articuloDao;
 
     @Autowired

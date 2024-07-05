@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.gestiondeproyectos.ProgramaGestionDeInventario.service.CategoriaService;
 import com.gestiondeproyectos.ProgramaGestionDeInventario.model.Categoria;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class CategoriaController{
@@ -65,11 +66,11 @@ public class CategoriaController{
     @PostMapping("/eliminarCategoria/{iden}")
     public String eliminarCategoria(@PathVariable("iden") Long id, Model model) {
         try {
-            var categoria = categoriaService.obtenerCategoriaPorId(id);
+            Categoria categoria = categoriaService.obtenerCategoriaPorId(id);
             categoriaService.eliminar(categoria);
         } catch (IllegalStateException e) {
             model.addAttribute("error", e.getMessage());
-            return "redirect:/listarCaregorias?error=" + e.getMessage();
+            return "redirect:/listarCategorias?error=" + e.getMessage();
         }
         return "redirect:/listarCategorias";
     }
