@@ -111,10 +111,14 @@
         <td th:text="${proveedor.cuit}">CUIT</td>
         <td th:text="${proveedor.baja}">Baja</td>
         <td>
-          <form th:action="@{'/eliminarProveedor/' + ${proveedor.iden}}" method="post" onsubmit="return confirm('¿Está seguro que desea dar de baja este proveedor?');">
-            <input type="hidden" name="_method" value="DELETE"/>
-            <button type="submit" class="btn btn-danger btn-sm">Dar de Baja</button>
+          <form th:action="@{'/eliminarProveedor/' + ${proveedor.iden}}" method="post" th:onsubmit="'return confirm('¿Está seguro que desea ' + ( ${proveedor.baja} ? 'dar de alta' : 'dar de baja') + ' este proveedor?');'">
+            <input type="hidden" name="_method" value="POST"/>
+            <button type="submit"
+                    th:text="${proveedor.baja} ? 'Dar de Alta' : 'Dar de Baja'"
+                    th:classappend="${proveedor.baja} ? 'btn btn-success btn-sm' : 'btn btn-danger btn-sm'">
+            </button>
           </form>
+
         </td>
       </tr>
     </tbody>
