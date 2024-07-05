@@ -2,11 +2,13 @@ package com.gestiondeproyectos.ProgramaGestionDeInventario.controller;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import com.gestiondeproyectos.ProgramaGestionDeInventario.model.*;
 import com.gestiondeproyectos.ProgramaGestionDeInventario.service.RolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,21 +46,20 @@ public class UsuarioController {
         usuarioService.guardar(usuario);
         return "redirect:/listarUsuarios";
     }*/
-        
-    @GetMapping("/crearUsuarioConPermisos")
-    public String crearUsuario(Model model, Authentication authentication){
-        Usuario sessionUser =(Usuario) authentication.getPrincipal();
-        if(sessionUser.getRol().getDescripcion().equals("Usuario")){
-            return "redirect:/listarUsuarios";
-        }
-        List<RolEnum> roles = Arrays.asList(RolEnum.values());
-        model.addAttribute("roles", roles);
-        model.addAttribute("usuario", new Usuario());
-        return "crearUsuario";
-    }
 
     @GetMapping("/crearUsuario")
-    public String crearUsuario(Model model){
+    public String crearUsuario(Model model, Authentication authentication){
+        String name = ((UserDetails) authentication.getPrincipal()).getUsername();
+        String email = (usuarioService.findByUsername(name)).get().getEmail();
+        Optional<Usuario> optionalSessionUser = Optional.ofNullable(usuarioService.findByEmail(email));
+
+        if (optionalSessionUser.isPresent()) {
+            Usuario sessionUser = optionalSessionUser.get();
+            if ("Usuario".equals(sessionUser.getRol().getDescripcion())) {
+                return "redirect:/listarUsuarios";
+            }
+        }
+
         List<RolEnum> roles = Arrays.asList(RolEnum.values());
         model.addAttribute("roles", roles);
         model.addAttribute("usuario", new Usuario());
@@ -67,18 +68,25 @@ public class UsuarioController {
 
     @PostMapping("/crearUsuario")
     public String guardarUsuario(Usuario usuario){
-        // Aquí asignas el rol al usuario basado en el valor seleccionado del enum
-        //Usuario usuarioAux = usuarioService.findByEmail(usuario.getEmail());
-        //if(usuarioAux!=null && usuarioAux.getIden()!=usuario.getIden() && usuarioAux.getEmail()==usuario.getEmail()){
-        //return "crearUsuario";
-        //}
         usuario.setRol(usuario.getRol());
         usuarioService.guardar(usuario);
         return "redirect:/listarUsuarios";
     }
 
     @PostMapping("/eliminarUsuario/{iden}")
-    public String eliminarUsuario(@PathVariable Long iden) {
+    public String eliminarUsuario(@PathVariable Long iden, Authentication authentication) {
+        String name = ((UserDetails) authentication.getPrincipal()).getUsername();
+        String email = (usuarioService.findByUsername(name)).get().getEmail();
+        Optional<Usuario> optionalSessionUser = Optional.ofNullable(usuarioService.findByEmail(email));
+
+        if (optionalSessionUser.isPresent()) {
+            Usuario sessionUser = optionalSessionUser.get();
+            if (!"Administrador".equals(sessionUser.getRol().getDescripcion())) {
+                // Si el usuario no es administrador, redirigir a la lista de usuarios sin eliminar
+                return "redirect:/listarUsuarios";
+            }
+        }
+
         usuarioService.eliminar(iden);
         return "redirect:/listarUsuarios";
     }
