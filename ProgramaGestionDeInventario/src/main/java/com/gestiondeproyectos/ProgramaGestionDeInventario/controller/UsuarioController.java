@@ -10,6 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.gestiondeproyectos.ProgramaGestionDeInventario.service.UsuarioService;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -72,4 +73,9 @@ public class UsuarioController {
         return "redirect:/listarUsuarios";
     }
 
+    @PostMapping("/eliminarUsuario/{iden}")
+    public String eliminarUsuario(@PathVariable Long iden) {
+        usuarioService.eliminar(iden);
+        return "redirect:/listarUsuarios";
+    }
 }

@@ -2,10 +2,14 @@ package com.gestiondeproyectos.ProgramaGestionDeInventario.dao;
 
 import com.gestiondeproyectos.ProgramaGestionDeInventario.model.Proveedor;
 
+import jakarta.transaction.Transactional;
+
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 public interface ProveedorDao extends JpaRepository<Proveedor, Long> {
 
@@ -22,8 +26,10 @@ public interface ProveedorDao extends JpaRepository<Proveedor, Long> {
 
     Proveedor findByIden(Long iden);
 
-    @Query(value = "UPDATE proveedor SET baja = ?1 WHERE iden = ?2", nativeQuery=true)
-    void eliminar(Boolean estado, Long iden);
+    @Transactional
+    @Modifying 
+    @Query(value = "UPDATE proveedor SET baja = :estado WHERE iden = :userId", nativeQuery=true)
+    void eliminar(@Param("estado") Boolean estado, @Param("userId") Long userId);
 
 }
 /*@Query(value = "SELECT * FROM proveedor p " +

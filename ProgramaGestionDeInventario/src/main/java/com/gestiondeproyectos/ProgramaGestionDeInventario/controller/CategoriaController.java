@@ -62,8 +62,8 @@ public class CategoriaController{
         return "redirect:/listarCategorias";
     }
 
-    @GetMapping("/eliminarCategoria/{id}")
-    public String eliminarCategoria(@PathVariable("id") Long id, Model model) {
+    @PostMapping("/eliminarCategoria/{iden}")
+    public String eliminarCategoria(@PathVariable("iden") Long id, Model model) {
         try {
             var categoria = categoriaService.obtenerCategoriaPorId(id);
             categoriaService.eliminar(categoria);

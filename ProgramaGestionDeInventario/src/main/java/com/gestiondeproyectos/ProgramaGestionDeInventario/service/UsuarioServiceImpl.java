@@ -1,11 +1,13 @@
 package com.gestiondeproyectos.ProgramaGestionDeInventario.service;
 
 import com.gestiondeproyectos.ProgramaGestionDeInventario.dao.UsuarioDao;
+import com.gestiondeproyectos.ProgramaGestionDeInventario.model.Articulo;
 import com.gestiondeproyectos.ProgramaGestionDeInventario.model.Usuario;
 import com.gestiondeproyectos.ProgramaGestionDeInventario.dao.RolDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 import java.util.List;
@@ -65,4 +67,11 @@ public class UsuarioServiceImpl implements UsuarioService {
     public void updatePassword(String updatedPassword, Long iden) {
         usuarioDao.updatePassword(updatedPassword, iden);
     }
+
+    @Override
+    @Transactional
+    public void eliminar(Long iden) {
+        Usuario usuario = usuarioDao.findByIden(iden);
+        usuarioDao.delete(usuario);
+    }  
 }

@@ -99,17 +99,24 @@
       <th>Domicilio</th>
       <th>CUIT</th>
       <th>Baja</th>
+      <th>Acciones</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="proveedor : ${proveedores}">
-      <td th:text="${proveedor.nombre}">Nombre</td>
-      <td th:text="${proveedor.email}">Email</td>
-      <td th:text="${proveedor.telefono}">Teléfono</td>
-      <td th:text="${proveedor.domicilio}">Domicilio</td>
-      <td th:text="${proveedor.cuit}">CUIT</td>
-      <td th:text="${proveedor.baja}">Baja</td>
-    </tr>
+      <tr th:each="proveedor : ${proveedores}">
+        <td th:text="${proveedor.nombre}">Nombre</td>
+        <td th:text="${proveedor.email}">Email</td>
+        <td th:text="${proveedor.telefono}">Teléfono</td>
+        <td th:text="${proveedor.domicilio}">Domicilio</td>
+        <td th:text="${proveedor.cuit}">CUIT</td>
+        <td th:text="${proveedor.baja}">Baja</td>
+        <td>
+          <form th:action="@{'/eliminarProveedor/' + ${proveedor.iden}}" method="post" onsubmit="return confirm('¿Está seguro que desea dar de baja este proveedor?');">
+            <input type="hidden" name="_method" value="DELETE"/>
+            <button type="submit" class="btn btn-danger btn-sm">Dar de Baja</button>
+          </form>
+        </td>
+      </tr>
     </tbody>
   </table>
 </div>

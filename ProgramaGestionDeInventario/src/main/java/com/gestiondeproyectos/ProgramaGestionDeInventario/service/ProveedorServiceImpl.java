@@ -44,7 +44,8 @@ public class ProveedorServiceImpl implements ProveedorService {
 
     @Override
     @Transactional
-    public void eliminar(Proveedor proveedor) {
+    public void eliminar(Long iden) {
+      Proveedor proveedor = proveedorDao.findByIden(iden);
       Boolean estado = proveedor.getBaja();
       estado = !estado;
       proveedorDao.eliminar(estado, proveedor.getIden());

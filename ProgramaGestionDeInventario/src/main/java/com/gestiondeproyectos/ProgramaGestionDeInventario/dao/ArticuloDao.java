@@ -1,6 +1,8 @@
 package com.gestiondeproyectos.ProgramaGestionDeInventario.dao;
 
 import com.gestiondeproyectos.ProgramaGestionDeInventario.model.Articulo;
+import com.gestiondeproyectos.ProgramaGestionDeInventario.model.Proveedor;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -30,7 +32,6 @@ public interface ArticuloDao extends JpaRepository<Articulo, Long> {
             "JOIN categoria c ON cpa.categoria_iden = c.iden " +
             "ORDER BY a.nombre ASC", nativeQuery = true)
     List<Articulo> listItems();
-
-
-
+    
+    Articulo findByIden(Long iden);
 }

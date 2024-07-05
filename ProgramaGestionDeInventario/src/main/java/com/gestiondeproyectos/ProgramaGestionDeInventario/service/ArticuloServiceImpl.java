@@ -64,7 +64,8 @@ public class ArticuloServiceImpl implements ArticuloService {
 
     @Override
     @Transactional
-    public void eliminar(Articulo articulo) {
+    public void eliminar(Long iden) {
+        Articulo articulo = articuloDao.findByIden(iden);
         articuloDao.delete(articulo);
     }  
 
