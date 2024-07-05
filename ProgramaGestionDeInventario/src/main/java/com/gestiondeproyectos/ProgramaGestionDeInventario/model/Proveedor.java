@@ -25,7 +25,7 @@ public class Proveedor {
     private String domicilio;
 
     @Column(name = "cuit", nullable = false)
-    private String cuit;
+    private int cuit;
 
     @Column(name = "baja", nullable = false)
     private Boolean baja;
@@ -70,11 +70,11 @@ public class Proveedor {
         this.domicilio = domicilio;
     }
 
-    public String getCuit() {
+    public int getCuit() {
         return cuit;
     }
 
-    public void setCuit(String cuit) {
+    public void setCuit(int cuit) {
         this.cuit = cuit;
     }
 
