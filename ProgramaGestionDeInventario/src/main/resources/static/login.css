@@ -1,7 +1,7 @@
 .login-page{
     height: 100vh;
     max-height: 100vh;
-    background-image: url('../static/media/fondoIndex.AVIF');
+    background-image: url('/media/fondoIndex.AVIF');
     top: 0;
     left: 0;
     background-size: cover;
