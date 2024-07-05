@@ -14,11 +14,12 @@ import java.util.List;
 
 public interface UsuarioDao extends JpaRepository<Usuario, Long> {
     Usuario findByNombre(String nombre);
+    
     @Query(value = "SELECT * FROM usuario u ORDER BY u.nombre ASC", nativeQuery = true)
     List<Usuario> listarUsuarios();
 
     @Query(value = "SELECT * FROM usuario u WHERE u.email = :email", nativeQuery = true)
-    Usuario findByEmail(@Param("email") String email);    
+    Usuario findByEmail(@Param("email") String email);
 
     @Transactional
     @Modifying 
