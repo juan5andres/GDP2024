@@ -1,12 +1,14 @@
 package com.gestiondeproyectos.ProgramaGestionDeInventario.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gestiondeproyectos.ProgramaGestionDeInventario.service.CategoriaService;
 import com.gestiondeproyectos.ProgramaGestionDeInventario.model.Categoria;
@@ -63,13 +65,16 @@ public class CategoriaController{
     }
 
     @PostMapping("/eliminarCategoria/{iden}")
-    public String eliminarCategoria(@PathVariable("iden") Long id, Model model) {
+    public String eliminarCategoria(@PathVariable("iden") Long id, RedirectAttributes redirectAttributes) {
         try {
             var categoria = categoriaService.obtenerCategoriaPorId(id);
             categoriaService.eliminar(categoria);
+        } catch (DataIntegrityViolationException e) {
+            redirectAttributes.addFlashAttribute("error", "No se puede eliminar la categoría porque tiene artículos asociados.");
+            return "redirect:/listarCategorias";
         } catch (IllegalStateException e) {
-            model.addAttribute("error", e.getMessage());
-            return "redirect:/listarCaregorias?error=" + e.getMessage();
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+            return "redirect:/listarCategorias";
         }
         return "redirect:/listarCategorias";
     }
