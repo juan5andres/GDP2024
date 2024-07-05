@@ -192,8 +192,8 @@
       });
     }
 
-    // Función de filtro personalizada
-    var customFilterFunction = function(settings, data, dataIndex) {
+    // Función de filtro personalizada para estado del stock
+    var customStockFilterFunction = function(settings, data, dataIndex) {
       var cantidadMinima = parseFloat(data[5]) || 0;
       var stock = parseFloat(data[6]) || 0;
       var value = $('#stockStatus').val();
@@ -209,6 +209,16 @@
       return false;
     };
 
+    // Función de filtro personalizada para fecha de caducidad
+    var customDateFilterFunction = function(settings, data, dataIndex) {
+      var selectedDate = $('#searchDate').datepicker("getDate");
+      var articuloDate = $.datepicker.parseDate('dd/mm/yy', data[7]);
+      if (!selectedDate || !articuloDate) {
+        return true;
+      }
+      return articuloDate <= selectedDate;
+    };
+
     // Cambiar la entrada de búsqueda según la columna seleccionada
     $('#searchColumn').on('change', function() {
       $('#searchText').val('').hide();
@@ -217,10 +227,15 @@
       var column = $(this).val();
       if (column == 7) { // Fecha de Caducidad
         $('#searchDate').show();
+        resetCustomFilters();
+        $.fn.dataTable.ext.search.push(customDateFilterFunction);
       } else if (column == 6) { // Estado del Stock
         $('#stockStatus').show();
+        resetCustomFilters();
+        $.fn.dataTable.ext.search.push(customStockFilterFunction);
       } else {
         $('#searchText').show();
+        resetCustomFilters();
       }
       table.columns().search('').draw();
     });
@@ -233,14 +248,11 @@
 
     // Aplicar búsqueda por fecha
     $('#searchDate').on('change', function() {
-      var column = $('#searchColumn').val();
-      table.column(column).search(this.value).draw();
+      table.draw();
     });
 
     // Filtrar por estado del stock
     $('#stockStatus').on('change', function() {
-      resetCustomFilters();
-      $.fn.dataTable.ext.search.push(customFilterFunction);
       table.draw();
     });
 
