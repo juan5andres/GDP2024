@@ -15,4 +15,5 @@ public interface UsuarioService {
     public List<Usuario> listarUsuarios();
     public Usuario findByEmail(String email);
     void updatePassword(String updatedPassword, Long iden);
+    void eliminar(Long iden);
 }

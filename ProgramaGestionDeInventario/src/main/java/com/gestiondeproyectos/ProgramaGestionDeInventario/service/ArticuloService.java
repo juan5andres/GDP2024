@@ -17,5 +17,5 @@ public interface ArticuloService {
 
     public List<Articulo> listarArticulosConStockBajo();
 
-    public void eliminar(Articulo articulo);
+    public void eliminar(Long iden);
 }

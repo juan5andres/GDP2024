@@ -127,6 +127,7 @@
       <th>Stock</th>
       <th>Fecha de Caducidad</th>
       <th>Unidad de Referencia</th>
+      <th>Acciones</th>
     </tr>
     </thead>
     <tbody>
@@ -148,6 +149,12 @@
         <i class="fas fa-exclamation-circle icon-exclamation" th:if="${articulo.fechaProxima && !articulo.fechaVencida}" style="color: yellow;"></i>
       </td>
       <td th:text="${articulo.unidadDeReferencia}">Unidad de Referencia</td>
+      <td>
+        <form th:action="@{'/eliminarArticulo/' + ${articulo.iden}}" method="post" onsubmit="return confirm('¿Está seguro que desea eliminar este articulo?');">
+          <input type="hidden" name="_method" value="DELETE"/>
+          <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+        </form>
+      </td>
     </tr>
     </tbody>
   </table>

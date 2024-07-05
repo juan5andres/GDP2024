@@ -98,6 +98,7 @@
       <th>Correo Electrónico</th>
       <th>Teléfono</th>
       <th>Rol</th>
+      <th>Acciones</th>
     </tr>
     </thead>
     <tbody>
@@ -106,6 +107,12 @@
       <td th:text="${usuario.email}">Correo Electrónico</td>
       <td th:text="${usuario.telefono}">Teléfono</td>
       <td th:text="${usuario.rol.descripcion}">Rol</td>
+      <td>
+        <form th:action="@{'/eliminarUsuario/' + ${usuario.iden}}" method="post" onsubmit="return confirm('¿Está seguro que desea eliminar este usuario?');">
+          <input type="hidden" name="_method" value="DELETE"/>
+          <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+        </form>
+      </td>
     </tr>
     </tbody>
   </table>

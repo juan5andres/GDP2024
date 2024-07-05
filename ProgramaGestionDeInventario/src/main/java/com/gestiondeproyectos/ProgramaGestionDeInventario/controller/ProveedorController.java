@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -61,10 +62,10 @@ public class ProveedorController {
         return "crearProveedor";
     }
     
-    @PostMapping("/eliminarProveedor")
-    public String eliminarProveedor(Proveedor proveedor) {
-        proveedorService.eliminar(proveedor);
-        return "redirect:/";
+    @PostMapping("/eliminarProveedor/{iden}")
+    public String eliminarProveedor(@PathVariable Long iden) {
+        proveedorService.eliminar(iden);
+        return "redirect:/listarProveedores";
     }
 
     @GetMapping("/listarProveedores")

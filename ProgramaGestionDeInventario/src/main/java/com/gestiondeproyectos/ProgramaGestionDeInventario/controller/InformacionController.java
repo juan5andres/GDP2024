@@ -11,9 +11,4 @@ public class InformacionController {
     public String manualController() {
         return "manual";
     }
-
-    @GetMapping("/nosotros")
-    public String nosotrosController() {
-        return "nosotros";
-    }
 }

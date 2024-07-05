@@ -71,12 +71,10 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item font-weight-bold">
-                            <a class="nav-link text-white donar-button" href="/cerrarSesion">Cerrar sesión</a>
-                        </li>
-                    </ul>
                 </div>
+                <form action="#" th:action="@{/logout}" th:method="post" class="d-flex">
+                    <input class="btn btn-danger btn-block me-2" type="submit" value="Cerrar sesión" onclick="return confirm('¿Desea cerrar sesión?');">
+                </form>
             </nav>
         </div>
     </header>
