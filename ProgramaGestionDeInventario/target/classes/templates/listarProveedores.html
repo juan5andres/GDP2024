@@ -78,7 +78,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
       </div>
-      <form action="#" th:action="@{/login}" th:method="post" class="d-flex">
+      <form action="#" th:action="@{/logout}" th:method="post" class="d-flex">
         <input class="btn btn-danger form-control me-2" type="submit" value="Cerrar sesión" onclick="return confirm('¿Desea cerrar sesión?');">
       </form>
     </nav>
@@ -99,17 +99,28 @@
       <th>Domicilio</th>
       <th>CUIT</th>
       <th>Baja</th>
+      <th>Acciones</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="proveedor : ${proveedores}">
-      <td th:text="${proveedor.nombre}">Nombre</td>
-      <td th:text="${proveedor.email}">Email</td>
-      <td th:text="${proveedor.telefono}">Teléfono</td>
-      <td th:text="${proveedor.domicilio}">Domicilio</td>
-      <td th:text="${proveedor.cuit}">CUIT</td>
-      <td th:text="${proveedor.baja}">Baja</td>
-    </tr>
+      <tr th:each="proveedor : ${proveedores}">
+        <td th:text="${proveedor.nombre}">Nombre</td>
+        <td th:text="${proveedor.email}">Email</td>
+        <td th:text="${proveedor.telefono}">Teléfono</td>
+        <td th:text="${proveedor.domicilio}">Domicilio</td>
+        <td th:text="${proveedor.cuit}">CUIT</td>
+        <td th:text="${proveedor.baja}">Baja</td>
+        <td>
+          <form th:action="@{'/eliminarProveedor/' + ${proveedor.iden}}" method="post" th:onsubmit="'return confirm('¿Está seguro que desea ' + ( ${proveedor.baja} ? 'dar de alta' : 'dar de baja') + ' este proveedor?');'">
+            <input type="hidden" name="_method" value="POST"/>
+            <button type="submit"
+                    th:text="${proveedor.baja} ? 'Dar de Alta' : 'Dar de Baja'"
+                    th:classappend="${proveedor.baja} ? 'btn btn-success btn-sm' : 'btn btn-danger btn-sm'">
+            </button>
+          </form>
+
+        </td>
+      </tr>
     </tbody>
   </table>
 </div>
