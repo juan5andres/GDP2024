@@ -11,7 +11,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.gestiondeproyectos.ProgramaGestionDeInventario.service.UsuarioService;
@@ -101,4 +103,38 @@ public class UsuarioController {
         usuarioService.eliminar(iden);
         return "redirect:/listarUsuarios";
     }
+
+    @GetMapping("/editarUsuario/{iden}")
+    public String mostrarFormularioEditarUsuario(@PathVariable("iden") Long iden, Model model) {
+        Usuario usuario = usuarioService.findByIden(iden);
+        if (usuario != null) {
+            model.addAttribute("usuario", usuario);
+            model.addAttribute("action", "editar");
+            return "editarUsuario";
+        }
+        return "redirect:/listarUsuarios";
+    }
+
+    @PostMapping("/guardarUsuario")
+    public String actualizarUsuario(@ModelAttribute Usuario usuario, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("usuario", usuario);
+            return "editarUsuario";
+        }
+        if (usuario.getIden() == null) {
+            model.addAttribute("error", "ID del usuario no puede ser null");
+            return "editarUsuario";
+        }
+        Usuario existingUsuario = usuarioService.findByIden(usuario.getIden());
+        if (existingUsuario != null) {
+            usuario.setPassword(existingUsuario.getPassword());
+            usuario.setRol(existingUsuario.getRol());
+        } else {
+            model.addAttribute("error", "Usuario no encontrado");
+            return "redirect:/index";
+        }
+        usuarioService.actualizarUsuario(usuario);
+        return "redirect:/index";
+    }
+    
 }

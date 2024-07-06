@@ -74,4 +74,15 @@ public class UsuarioServiceImpl implements UsuarioService {
         Usuario usuario = usuarioDao.findByIden(iden);
         usuarioDao.delete(usuario);
     }  
+
+    @Override
+    public Usuario findByIden(Long iden){
+        return usuarioDao.findById(iden).orElse(null);
+    }
+
+    @Override
+    public void actualizarUsuario(Usuario user) {
+        usuarioDao.save(user);
+    }
+    
 }
