@@ -26,6 +26,8 @@ public interface ProveedorDao extends JpaRepository<Proveedor, Long> {
 
     Proveedor findByIden(Long iden);
 
+    Proveedor findByNombre(String nombre);
+
     @Transactional
     @Modifying 
     @Query(value = "UPDATE proveedor SET baja = :estado WHERE iden = :userId", nativeQuery=true)

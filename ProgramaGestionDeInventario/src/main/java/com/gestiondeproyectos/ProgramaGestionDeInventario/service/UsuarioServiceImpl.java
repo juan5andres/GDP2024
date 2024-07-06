@@ -45,8 +45,8 @@ public class UsuarioServiceImpl implements UsuarioService {
     }*/
 
     @Override
-    public Optional<Usuario> findByUsername(String username) {
-        return Optional.ofNullable(usuarioDao.findByNombre(username));
+    public Usuario findByUsername(String username) {
+        return usuarioDao.findByNombre(username);
     }
 
     @Override

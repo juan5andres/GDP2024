@@ -31,10 +31,19 @@ public class CategoriaController{
             Categoria categoriaExistente = categoriaService.obtenerCategoriaPorId(categoria.getIden());
             if (categoriaExistente != null) {
                 categoriaExistente.setDescripcion(categoria.getDescripcion());
-                categoriaService.guardar(categoriaExistente);
+                if(categoriaService.findByDesc(categoriaExistente.getDescripcion()) == null){
+                    categoriaService.guardar(categoriaExistente);
+                }
+                else{
+                    return "crearCategoria";
+                }
             }
         } else {
             // Crear nueva categoría
+            Categoria categoriaAux = categoriaService.findByDesc(categoria.getDescripcion());
+            if (categoriaAux!=null && !categoriaAux.getIden().equals(categoria.getIden()) && categoriaAux.getDescripcion().equals(categoria.getDescripcion())){
+                return "crearCategoria";
+            }
             categoriaService.guardar(categoria);
         }
         return "redirect:/listarCategorias";

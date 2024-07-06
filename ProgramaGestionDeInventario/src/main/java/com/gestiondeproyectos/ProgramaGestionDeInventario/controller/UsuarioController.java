@@ -67,11 +67,17 @@ public class UsuarioController {
 
     @PostMapping("/crearUsuario")
     public String guardarUsuario(Usuario usuario){
-        // Aquí asignas el rol al usuario basado en el valor seleccionado del enum
-        //Usuario usuarioAux = usuarioService.findByEmail(usuario.getEmail());
-        //if(usuarioAux!=null && usuarioAux.getIden()!=usuario.getIden() && usuarioAux.getEmail()==usuario.getEmail()){
-        //return "crearUsuario";
-        //}
+        Usuario usuarioAux = usuarioService.findByEmail(usuario.getEmail());
+        if (usuarioAux==null){
+            usuarioAux = usuarioService.findByUsername(usuario.getNombre());
+            if (usuarioAux!=null && !usuarioAux.getIden().equals(usuario.getIden()) && usuarioAux.getNombre().equals(usuario.getNombre())){
+                return "crearUsuario";
+            }
+        }else{
+            if(!usuarioAux.getIden().equals(usuario.getIden()) && usuarioAux.getEmail().equals(usuario.getEmail())){
+                return "crearUsuario";
+            }
+        }
         usuario.setRol(usuario.getRol());
         usuarioService.guardar(usuario);
         return "redirect:/listarUsuarios";
