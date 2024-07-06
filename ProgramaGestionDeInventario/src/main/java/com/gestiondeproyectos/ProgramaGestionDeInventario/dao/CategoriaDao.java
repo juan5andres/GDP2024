@@ -6,4 +6,6 @@ public interface CategoriaDao extends JpaRepository<Categoria, Long>{
     
     public Categoria findByIden(Long iden);
 
+    Categoria findByDescripcion(String desc);
+
 }

@@ -4,6 +4,7 @@ import com.gestiondeproyectos.ProgramaGestionDeInventario.model.Categoria;
 import com.gestiondeproyectos.ProgramaGestionDeInventario.dao.ArticuloDao;
 import java.util.List;
 
+import com.gestiondeproyectos.ProgramaGestionDeInventario.model.Proveedor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -48,6 +49,10 @@ public class CategoriaServiceImpl implements CategoriaService{
         } else {
             throw new IllegalStateException("La categoría está vinculada a artículos o proveedores y no puede ser eliminada.");
         }
+    }
+    @Override
+    public Categoria findByDesc(String desc) {
+        return categoriaDao.findByDescripcion(desc);
     }
     /*@Transactional
     public void eliminar(Categoria categoria) {categoriaDao.delete(categoria);}*/

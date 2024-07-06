@@ -15,4 +15,6 @@ public interface CategoriaService {
     public boolean categoriaNoVinculada(Categoria categoria);
 
     public Categoria obtenerCategoriaPorId(Long id);
+
+    Categoria findByDesc(String desc);
 }

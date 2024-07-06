@@ -2,6 +2,7 @@ package com.gestiondeproyectos.ProgramaGestionDeInventario.service;
 
 import com.gestiondeproyectos.ProgramaGestionDeInventario.dao.ProveedorDao;
 import com.gestiondeproyectos.ProgramaGestionDeInventario.model.Proveedor;
+import com.gestiondeproyectos.ProgramaGestionDeInventario.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +23,11 @@ public class ProveedorServiceImpl implements ProveedorService {
     @Transactional
     public List<Proveedor> listarProveedores() {
         return proveedorDao.listarProveedores();
+    }
+
+    @Override
+    public Proveedor findByName(String nombre) {
+        return proveedorDao.findByNombre(nombre);
     }
 
     @Override

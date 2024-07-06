@@ -1,5 +1,6 @@
 package com.gestiondeproyectos.ProgramaGestionDeInventario.controller;
 
+import com.gestiondeproyectos.ProgramaGestionDeInventario.model.Usuario;
 import com.gestiondeproyectos.ProgramaGestionDeInventario.service.CategoriaService;
 import com.gestiondeproyectos.ProgramaGestionDeInventario.service.ProveedorService;
 import com.gestiondeproyectos.ProgramaGestionDeInventario.model.Proveedor;
@@ -36,6 +37,10 @@ public class ProveedorController {
 
     @PostMapping("/crearProveedor")
     public String crearProveedor(Proveedor proveedor) {
+        Proveedor proveedorAux = proveedorService.findByName(proveedor.getNombre());
+        if (proveedorAux!=null && !proveedorAux.getIden().equals(proveedor.getIden()) && proveedorAux.getNombre().equals(proveedor.getNombre())){
+            return "crearProveedor";
+        }
         proveedor.setBaja(false);
         proveedorService.guardar(proveedor);
         return "redirect:/listarProveedores";
