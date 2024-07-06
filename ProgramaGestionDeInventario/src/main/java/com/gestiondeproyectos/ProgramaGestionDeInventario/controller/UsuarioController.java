@@ -2,11 +2,13 @@ package com.gestiondeproyectos.ProgramaGestionDeInventario.controller;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import com.gestiondeproyectos.ProgramaGestionDeInventario.model.*;
 import com.gestiondeproyectos.ProgramaGestionDeInventario.service.RolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +27,18 @@ public class UsuarioController {
     private RolService rolService;
 
     @GetMapping("/listarUsuarios")
-    public String listarUsuarios(Model model) {
+    public String listarUsuarios(Model model, Authentication authentication) {
+        String name = ((UserDetails) authentication.getPrincipal()).getUsername();
+        String email = (usuarioService.findByUsername(name)).getEmail();
+        Optional<Usuario> optionalSessionUser = Optional.ofNullable(usuarioService.findByEmail(email));
+        if (optionalSessionUser.isPresent()) {
+            Usuario sessionUser = optionalSessionUser.get();
+            if ("Usuario".equals(sessionUser.getRol().getDescripcion())) {
+                Usuario usuario = usuarioService.findByEmail(email);
+                model.addAttribute("usuario", usuario);
+                return "listarUsuarioPropio";
+            }
+        }
         List<Usuario> usuarios = usuarioService.listarUsuarios();
         model.addAttribute("usuarios", usuarios);
         return "listarUsuarios";
