@@ -260,11 +260,36 @@
     $('#exportarPdf').on('click', function() {
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF();
-      doc.autoTable({ html: '#articulosTable' });
-      doc.save('articulos.pdf');
+
+      // Obtener el contenido de la tabla
+      var rows = [];
+      var headers = [];
+      $('#articulosTable thead tr th').each(function(index) {
+        if (index < 9) { // Excluir la última columna "Acciones"
+          headers.push($(this).text());
+        }
+      });
+      $('#articulosTable tbody tr').each(function() {
+        var row = [];
+        $(this).find('td').each(function(index) {
+          if (index < 9) { // Excluir la última columna "Acciones"
+            row.push($(this).text());
+          }
+        });
+        rows.push(row);
+      });
+
+      // Crear la tabla en el PDF
+      doc.autoTable({
+        head: [headers],
+        body: rows
+      });
+
+      doc.save('Articulos.pdf');
     });
   });
 </script>
+
 
 </body>
 </html>
