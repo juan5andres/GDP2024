@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
-            background-image: url('/media/fondoIndex.AVIF');
+            background-image: url('../static/media/fondoIndex.AVIF');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -21,7 +21,10 @@
             background-position: center;
             box-shadow: 4px 4px 10px rgba(0, 0, 0, 1.2);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 15px;
         }
+
+
         .square:hover {
             transform: translateY(-10px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
@@ -53,6 +56,7 @@
             text-align: center;
             cursor: pointer;
             text-shadow: 4px 4px 6px rgba(0, 0, 0, 1);
+            border-radius: 15px;
         }
         .nav-link {
             text-shadow: 4px 4px 5px rgba(0, 0, 0, 1.2);
@@ -81,69 +85,76 @@
 </head>
 <body>
 
-    <header style="background-color: rgba(255, 255, 255, 0);">
-        <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgba(0, 0, 0, 0.5);">
-                <a class="navbar-brand text-white font-weight-bold" href="#index">
-                    SGI
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-white" href="#" id="notificationDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img src="../static/media/bell-icon.png" alt="Notificaciones" style="width: 24px; height: 24px;">
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notificationDropdown">
-                                <h6 class="dropdown-header">Notificaciones</h6>
-                                <div id="notificationsList">
-                                </div>
+<header style="background-color: rgba(255, 255, 255, 0);">
+    <div class="container-fluid" style="padding-left: 40px; padding-right: 25px;">  <!-- Cambiado de "container" a "container-fluid" y añadido "p-0" -->
+        <nav class="navbar navbar-expand-lg navbar-light w-100" style="background-color: rgba(0, 0, 0, 0.5);">
+            <a class="navbar-brand text-white font-weight-bold" href="#index">
+                SGI
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown mr-3">
+                        <a class="nav-link dropdown-toggle text-white" href="#" id="notificationDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="../static/media/bell-icon.png" alt="Notificaciones" style="width: 24px; height: 24px;">
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notificationDropdown">
+                            <h6 class="dropdown-header">Notificaciones</h6>
+                            <div id="notificationsList">
                             </div>
-                        </li>
-                        <form action="#" th:action="@{/logout}" th:method="post" class="d-flex">
-                            <input class="btn btn-danger form-control me-2" type="submit" value="Cerrar sesión" onclick="return confirm('¿Desea cerrar sesión?');">
-                        </form>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-    </header>
+                        </div>
+                    </li>
+                    <form action="#" th:action="@{/logout}" th:method="post" class="d-flex">
+                        <input class="btn btn-danger form-control me-2" type="submit" value="Cerrar sesión" onclick="return confirm('¿Desea cerrar sesión?');">
+                    </form>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</header>
+
+
 
 <div class="container mt-4">
+
     <div class="row justify-content-center">
+        <div class="container-fluid text-center">
+        <p class="text-white text-shadow mb-0" style="font-size: 25px;font-family: 'Arial Black', sans-serif, sans-serif;letter-spacing: 2px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5)">Sistema de gestión de inventarios</p>
+        </div>
         <div class="col-md-3 col-sm-6 mb-4">
-            <div class="square fade-in" style="background-image: url('/media/proveedor.jpg');">
+
+            <div class="square fade-in">
                 <a href="/listarProveedores">
-                    <div class="square-content">
+                    <div class="square-content" style="font-size: 24px;font-family: 'Arial Black', sans-serif, sans-serif; letter-spacing: 1px; text-shadow: 1px 1px 2px rgba(0,0,0,0.8);">
                         Proveedor
                     </div>
                 </a>
             </div>
         </div>
         <div class="col-md-3 col-sm-6 mb-4">
-            <div class="square fade-in" style="background-image: url('/media/almacen.JPG');">
+            <div class="square fade-in">
                 <a href="/listarArticulos">
-                    <div class="square-content">
+                    <div class="square-content" style="font-size: 24px;font-family: 'Arial Black', sans-serif; letter-spacing: 1px; text-shadow: 1px 1px 2px rgba(0,0,0,0.8);">
                         Almacen
                     </div>
                 </a>
             </div>
         </div>
         <div class="col-md-3 col-sm-6 mb-4">
-            <div class="square fade-in" style="background-image: url('/media/usuario.JPG');">
+            <div class="square fade-in">
                 <a href="/listarUsuarios">
-                    <div class="square-content">
+                    <div class="square-content" style="font-size: 24px;font-family: 'Arial Black', sans-serif; letter-spacing: 1px; text-shadow: 1px 1px 2px rgba(0,0,0,0.8);">
                         Usuario
                     </div>
                 </a>
             </div>
         </div>
         <div class="col-md-3 col-sm-6 mb-4">
-            <div class="square fade-in" style="background-image: url('/media/configuracion.JPG');">
+            <div class="square fade-in">
                 <a href="/manual">
-                    <div class="square-content">
+                    <div class="square-content" style="font-size: 24px; font-family: 'Arial Black', sans-serif; letter-spacing: 1px; text-shadow: 1px 1px 2px rgba(0,0,0,0.8);">
                         Manual de usuario
                     </div>
                 </a>
