@@ -14,7 +14,11 @@ public interface ProveedorService {
 
     void guardar(Proveedor proveedor);
 
-    void eliminar(Long iden);
+    void darDeBaja(Long iden);
 
     public Proveedor obtenerProveedorPorId(Long id);
+
+    void eliminarProveedor(Long iden);
+
+    boolean proveedorNoVinculado(Proveedor proveedor);
 }

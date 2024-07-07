@@ -31,7 +31,10 @@ public interface ProveedorDao extends JpaRepository<Proveedor, Long> {
     @Transactional
     @Modifying 
     @Query(value = "UPDATE proveedor SET baja = :estado WHERE iden = :userId", nativeQuery=true)
-    void eliminar(@Param("estado") Boolean estado, @Param("userId") Long userId);
+    void darDeBaja(@Param("estado") Boolean estado, @Param("userId") Long userId);
+
+    
+
 
 }
 /*@Query(value = "SELECT * FROM proveedor p " +

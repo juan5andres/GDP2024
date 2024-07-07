@@ -17,6 +17,9 @@ public interface ArticuloDao extends JpaRepository<Articulo, Long> {
     @Query("SELECT a FROM Articulo a WHERE a.categoria.iden = :categoriaId")
     List<Articulo> findByCategoriaId(@Param("categoriaId") Long categoriaId);
 
+    @Query("SELECT a FROM Articulo a WHERE a.proveedor.iden = :proveedorId")
+    List<Articulo> findByProveedorId(@Param("proveedorId") Long proveedorId);
+
     /*@Query(value = "SELECT * FROM articulo a " +
             "JOIN categoria_por_articulo cpa ON a.iden = cpa.articulo_iden " +
             "JOIN categoria c ON cpa.categoria_iden = c.iden " +

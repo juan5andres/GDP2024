@@ -90,6 +90,9 @@
   <div class="mb-3">
     <a th:href="@{/crearProveedor}" class="btn btn-primary">Crear Proveedor</a>
   </div>
+  <div th:if="${param.error}">
+    <div class="alert alert-danger" role="alert" th:text="${param.error}"></div>
+  </div>
   <table id="proveedoresTable" class="table table-striped table-dark">
     <thead>
     <tr>
@@ -112,14 +115,16 @@
         <td th:text="${proveedor.baja}">Baja</td>
         <td>
           <a th:href="@{'/editarProveedor/' + ${proveedor.iden}}" class="btn btn-primary btn-sm">Editar</a>
-          <form th:action="@{'/eliminarProveedor/' + ${proveedor.iden}}" method="post" th:onsubmit="'return confirm('¿Está seguro que desea ' + ( ${proveedor.baja} ? 'dar de alta' : 'dar de baja') + ' este proveedor?');'">
+          <form th:action="@{'/darDeBaja/' + ${proveedor.iden}}" method="post" th:onsubmit="'return confirm('¿Está seguro que desea ' + ( ${proveedor.baja} ? 'dar de alta' : 'dar de baja') + ' este proveedor?');'">
             <input type="hidden" name="_method" value="POST"/>
             <button type="submit"
                     th:text="${proveedor.baja} ? 'Dar de Alta' : 'Dar de Baja'"
                     th:classappend="${proveedor.baja} ? 'btn btn-success btn-sm' : 'btn btn-danger btn-sm'">
             </button>
           </form>
-
+          <form th:action="@{'/eliminarProveedor/' + ${proveedor.iden}}" method="post" th:onsubmit="return confirm('¿Está seguro de que desea eliminar este proveedor');" style="display:inline;">
+            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+          </form>
         </td>
       </tr>
     </tbody>

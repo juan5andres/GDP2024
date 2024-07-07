@@ -3,6 +3,7 @@ package com.gestiondeproyectos.ProgramaGestionDeInventario.controller;
 import com.gestiondeproyectos.ProgramaGestionDeInventario.model.Usuario;
 import com.gestiondeproyectos.ProgramaGestionDeInventario.service.CategoriaService;
 import com.gestiondeproyectos.ProgramaGestionDeInventario.service.ProveedorService;
+import com.gestiondeproyectos.ProgramaGestionDeInventario.model.Categoria;
 import com.gestiondeproyectos.ProgramaGestionDeInventario.model.Proveedor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -92,9 +93,9 @@ public class ProveedorController {
     }*/
 
 
-    @PostMapping("/eliminarProveedor/{iden}")
-    public String eliminarProveedor(@PathVariable Long iden) {
-        proveedorService.eliminar(iden);
+    @PostMapping("/darDeBaja/{iden}")
+    public String darDeBaja(@PathVariable Long iden) {
+        proveedorService.darDeBaja(iden);
         return "redirect:/listarProveedores";
     }
 
@@ -104,4 +105,16 @@ public class ProveedorController {
         model.addAttribute("proveedores", proveedores);
         return "listarProveedores";
     }
+
+    @PostMapping("/eliminarProveedor/{iden}")
+    public String eliminarProveedor(@PathVariable Long iden, Model model) {
+        try {
+            proveedorService.eliminarProveedor(iden);
+        } catch (IllegalStateException e) {
+            model.addAttribute("error", e.getMessage());
+            return "redirect:/listarProveedores?error=" + e.getMessage();
+        }
+        return "redirect:/listarProveedores";
+    }
+
 }
