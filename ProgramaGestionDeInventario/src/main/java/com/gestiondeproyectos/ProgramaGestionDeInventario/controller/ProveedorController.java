@@ -59,12 +59,13 @@ public class ProveedorController {
                 proveedorExistente.setTelefono(proveedor.getTelefono());
                 proveedorExistente.setDomicilio(proveedor.getDomicilio());
                 proveedorExistente.setCuit(proveedor.getCuit());
-
                 // Guardar el proveedor actualizado
+                proveedorExistente.setBaja(false);
                 proveedorService.guardar(proveedorExistente);
             }
         } else {
             // Si el proveedor no tiene un ID, es un nuevo proveedor y debe ser creado
+            proveedor.setBaja(false);
             proveedorService.guardar(proveedor);
         }
         return "redirect:/listarProveedores";

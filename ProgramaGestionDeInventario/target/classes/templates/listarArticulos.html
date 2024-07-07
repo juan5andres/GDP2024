@@ -186,12 +186,12 @@
       dateFormat: 'dd/mm/yy'
     });
 
-    // Función para resetear los filtros personalizados
     function resetCustomFilters() {
-      $.fn.dataTable.ext.search = $.grep($.fn.dataTable.ext.search, function(value) {
-        return value != customFilterFunction;
-      });
-    }
+    $.fn.dataTable.ext.search = $.fn.dataTable.ext.search.filter(function (func) {
+      return func.name !== 'customStockFilter';
+    });
+    $('#articulosTable').DataTable().columns().search('').draw();
+  }
 
     // Función de filtro personalizada para estado del stock
     var customStockFilterFunction = function(settings, data, dataIndex) {
