@@ -12,9 +12,7 @@ import com.gestiondeproyectos.ProgramaGestionDeInventario.service.ProveedorServi
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 
 @Controller
@@ -36,45 +34,66 @@ public class ArticuloController {
 
 
     @GetMapping("/crearArticulo")
-    public String mostrarFormularioCrearArticulo(Model model) {
+    public String mostrarFormularioCrearArticulo(@RequestParam(value = "id", required = false) Long id, Model model) {
         List<Categoria> categorias = categoriaService.listarCategorias();
         List<Proveedor> proveedores = proveedorService.listarProveedores();
         model.addAttribute("categorias", categorias);
         model.addAttribute("proveedores", proveedores);
-        model.addAttribute("articulo", new Articulo());
+
+        if (id != null) {
+            Articulo articulo = articuloService.obtenerArticuloPorId(id);
+            model.addAttribute("articulo", articulo);
+        } else {
+            model.addAttribute("articulo", new Articulo());
+        }
+
         return "crearArticulo";
     }
 
+
+
     @PostMapping("/crearArticulo")
-    public String guardarArticulo(Articulo articulo) {
-        articuloService.guardar(articulo);
+    public String guardarArticulo(@ModelAttribute("articulo") Articulo articulo) {
+        // Si el artículo tiene un ID, significa que ya existe y debe ser actualizado
+        if (articulo.getIden() != null) {
+            // Obtener el artículo existente de la base de datos
+            Articulo articuloExistente = articuloService.obtenerArticuloPorId(articulo.getIden());
+            if (articuloExistente != null) {
+                // Actualizar los campos del artículo existente con los valores del formulario
+                articuloExistente.setNombre(articulo.getNombre());
+                articuloExistente.setCodigoProducto(articulo.getCodigoProducto());
+                articuloExistente.setCategoria(articulo.getCategoria());
+                articuloExistente.setProveedor(articulo.getProveedor());
+                articuloExistente.setStock(articulo.getStock());
+                articuloExistente.setPrecioUnitario(articulo.getPrecioUnitario());
+                articuloExistente.setFechaVencimiento(articulo.getFechaVencimiento());
+                articuloExistente.setUnidadDeReferencia(articulo.getUnidadDeReferencia());
+                articuloExistente.setCantidadMinima(articulo.getCantidadMinima());
+
+                // Guardar el artículo actualizado
+                articuloService.guardar(articuloExistente);
+            }
+        } else {
+            // Si el artículo no tiene un ID, es un nuevo artículo y debe ser creado
+            articuloService.guardar(articulo);
+        }
         return "redirect:/listarArticulos";
     }
 
-    /*@GetMapping("/agregarArticulo")
-    public String agregarArticulo(Articulo articulo, Model modelCategorias){
-        var categorias = categoriaService.listarCategorias();
-        modelCategorias.addAttribute("categorias", categorias);
-        return "crearArticulo";
-    }
 
-    @PostMapping("/guardarArticulo")
-    public String guardarArticulo(Articulo articulo, Model model){
-        var categorias = categoriaService.listarCategorias();
-        model.addAttribute("categorias", categorias);
-        articuloService.guardar(articulo);
-        return "redirect:/";
-    }
-
-
-    @GetMapping("/editarArticulo/{iden}")
-    public String editarArticulo(Articulo articulo, Model modelArticulo, Model modelCategoria) {
-        var categorias = categoriaService.listarCategorias();
-        modelCategoria.addAttribute("categorias", categorias);
-        articulo = articuloService.encontrarArticulo(articulo);
-        modelArticulo.addAttribute("articulo", articulo);
-        return "crearArticulo";
+    /*@GetMapping("/editarArticulo/{id}")
+    public String mostrarFormularioEditarArticulo(@PathVariable("id") Long id, Model model) {
+        Articulo articulo = articuloService.obtenerArticuloPorId(id);
+        if (articulo != null) {
+            model.addAttribute("articulo", articulo);
+            return "crearArticulo";
+        }
+        return "redirect:/listarArticulos";
     }*/
+    @GetMapping("/editarArticulo/{id}")
+    public String mostrarFormularioEditarArticulo(@PathVariable("id") Long id, Model model) {
+        return mostrarFormularioCrearArticulo(id, model);
+    }
 
     @PostMapping("/eliminarArticulo/{iden}")
     public String eliminarArticulo(@PathVariable Long iden) {

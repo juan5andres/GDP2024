@@ -70,7 +70,7 @@
 <header style="background-color: rgba(255, 255, 255, 0);">
   <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgba(0, 0, 0, 0.5);">
-      <a class="navbar-brand text-white font-weight-bold" href="index">
+      <a class="navbar-brand text-white font-weight-bold" href="/index">
         SGI
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -150,6 +150,7 @@
       </td>
       <td th:text="${articulo.unidadDeReferencia}">Unidad de Referencia</td>
       <td>
+        <a th:href="@{'/editarArticulo/' + ${articulo.iden}}" class="btn btn-primary btn-sm">Editar</a>
         <form th:action="@{'/eliminarArticulo/' + ${articulo.iden}}" method="post" onsubmit="return confirm('¿Está seguro que desea eliminar este articulo?');">
           <input type="hidden" name="_method" value="DELETE"/>
           <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
@@ -260,11 +261,36 @@
     $('#exportarPdf').on('click', function() {
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF();
-      doc.autoTable({ html: '#articulosTable' });
-      doc.save('articulos.pdf');
+
+      // Obtener el contenido de la tabla
+      var rows = [];
+      var headers = [];
+      $('#articulosTable thead tr th').each(function(index) {
+        if (index < 9) { // Excluir la última columna "Acciones"
+          headers.push($(this).text());
+        }
+      });
+      $('#articulosTable tbody tr').each(function() {
+        var row = [];
+        $(this).find('td').each(function(index) {
+          if (index < 9) { // Excluir la última columna "Acciones"
+            row.push($(this).text());
+          }
+        });
+        rows.push(row);
+      });
+
+      // Crear la tabla en el PDF
+      doc.autoTable({
+        head: [headers],
+        body: rows
+      });
+
+      doc.save('Articulos.pdf');
     });
   });
 </script>
+
 
 </body>
 </html>

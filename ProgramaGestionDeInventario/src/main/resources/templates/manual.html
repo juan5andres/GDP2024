@@ -122,21 +122,18 @@
     <p>Después de iniciar sesión, será dirigido a la página principal del sistema. Desde aquí, puede acceder a las diferentes secciones usando la barra de navegación superior:</p>
     <ul>
         <li><strong>Inicio</strong>: Vuelve a la página principal.</li>
-        <li><strong>Reportes</strong>: Accede a los reportes generados por el sistema.</li>
-        <li><strong>Facturación</strong>: Accede a la sección de facturación.</li>
-        <li><strong>Nosotros</strong>: Información sobre el equipo detrás del sistema.</li>
         <li><strong>Cerrar Sesión</strong>: Cierra su sesión actual.</li>
     </ul>
 
     <h3 id="gestión-de-artículos">Gestión de Artículos</h3>
-    <h4 id="crear-artículo">Crear Artículo</h4>
-    <p>1. Navegue a la sección de "Crear Artículo" desde la página principal.</p>
-    <p>2. Complete el formulario con la información del nuevo artículo (nombre, código, categoría, precio unitario, cantidad mínima, código de depósito, fecha de caducidad y unidad de referencia).</p>
-    <p>3. Haga clic en "Guardar Artículo" para añadir el nuevo artículo al sistema.</p>
-
     <h4 id="ver-lista-de-artículos">Ver Lista de Artículos</h4>
     <p>1. Navegue a la sección "Lista de Artículos".</p>
     <p>2. Aquí verá una tabla con todos los artículos registrados en el sistema, incluyendo detalles como nombre, código, categoría, precio unitario, etc.</p>
+
+    <h4 id="crear-artículo">Crear Artículo</h4>
+    <p>1. Navegue a la sección de "Crear Artículo" desde la lista de articulos.</p>
+    <p>2. Complete el formulario con la información del nuevo artículo (nombre, código, categoría, precio unitario, cantidad mínima, código de depósito, fecha de caducidad y unidad de referencia).</p>
+    <p>3. Haga clic en "Guardar Artículo" para añadir el nuevo artículo al sistema.</p>
 
     <h4 id="editar-artículo">Editar Artículo</h4>
     <p>1. Desde la "Lista de Artículos", busque el artículo que desea editar.</p>
@@ -149,17 +146,18 @@
     <p>3. Confirme la eliminación en la ventana emergente.</p>
 
     <h3 id="gestión-de-usuarios">Gestión de Usuarios</h3>
-    <h4 id="crear-usuario">Crear Usuario</h4>
-    <p>1. Navegue a la sección de "Crear Usuario" desde la página principal.</p>
+
+    <h4 id="ver-lista-de-usuarios">Ver Lista de Usuarios (Administradores)</h4>
+    <p>1. Navegue a la sección "Usuarios".</p>
+    <p>2. Aquí verá una tabla con todos los usuarios registrados en el sistema.</p>
+
+    <h4 id="crear-usuario">Crear Usuario (Administradores)</h4>
+    <p>1. Navegue a la sección de "Crear Usuario" desde la lista de usuarios.</p>
     <p>2. Complete el formulario con la información del nuevo usuario (nombre, email, teléfono, domicilio, rol).</p>
     <p>3. Haga clic en "Guardar Usuario" para añadir el nuevo usuario al sistema.</p>
 
-    <h4 id="ver-lista-de-usuarios">Ver Lista de Usuarios</h4>
-    <p>1. Navegue a la sección "Lista de Usuarios".</p>
-    <p>2. Aquí verá una tabla con todos los usuarios registrados en el sistema.</p>
-
     <h4 id="editar-usuario">Editar Usuario</h4>
-    <p>1. Desde la "Lista de Usuarios", busque el usuario que desea editar.</p>
+    <p>1. Desde "Usuarios", busque el usuario que desea editar (solo puede a sí mismo si no es administrador).</p>
     <p>2. Haga clic en el botón de "Editar" junto al usuario.</p>
     <p>3. Modifique la información en el formulario y haga clic en "Guardar Cambios".</p>
 
@@ -170,19 +168,14 @@
 
     <h3 id="gestion-de-proveedores">Gestión de Proveedores</h3>
     <p>Para gestionar proveedores en el sistema, siga estos pasos:</p>
+        <h4 id="listar-preoveedor">Listar proveedor</h4>
+        <p>Acceda a la sección "Lista de Proveedores" para ver todos los proveedores registrados en el sistema, junto con su información detallada. </p>
         <h4 id="crear-preoveedor">Crear proveedor</h4>
-        <p> Vaya a la sección "Crear Nuevo Proveedor". Complete el formulario con la información requerida del proveedor y haga clic en "Guardar Proveedor".</p>
+        <p> Vaya a la sección "Proveedor" y elija la opción de "Crear Proveedor". Complete el formulario con la información requerida del proveedor y haga clic en "Guardar Proveedor".</p>
         <h4 id="editar-preoveedor">Editar proveedor</h4>
         <p>Desde la "Lista de Proveedores", busque el proveedor que desea editar y haga clic en el botón "Editar". Modifique la información necesaria y luego presione "Guardar Cambios" </p>
         <h4 id="eliminar-preoveedor">Eliminar proveedor</h4>
         <p> En la "Lista de Proveedores", localice el proveedor que desea eliminar y haga clic en "Eliminar". Confirme la acción en la ventana emergente para completar la eliminación del proveedor</p>
-        <h4 id="listar-preoveedor">Listar proveedor</h4>
-        <p>Acceda a la sección "Lista de Proveedores" para ver todos los proveedores registrados en el sistema, junto con su información detallada. </p>
-
-    <h3 id="reportes">Reportes</h3>
-    <p>1. Navegue a la sección de "Reportes" para ver y generar informes sobre el stock y otras métricas importantes.</p>
-    <p>2. Seleccione el tipo de reporte que desea ver y el período de tiempo.</p>
-    <p>3. Haga clic en "Generar Reporte" para ver el informe.</p>
 
     <h3 id="cerrar-sesión">Cerrar Sesión</h3>
     <p>Para salir del sistema, haga clic en "Cerrar Sesión" en la barra de navegación superior. Confirme su decisión en la ventana emergente.</p>
@@ -192,7 +185,6 @@
         <li><strong>No puedo iniciar sesión</strong>: Asegúrese de que su nombre de usuario y contraseña son correctos. Si ha olvidado su contraseña, contacte al administrador del sistema para restablecerla.</li>
         <li><strong>No puedo encontrar un artículo/usuario</strong>: Use la barra de búsqueda en la "Lista de Artículos" o "Lista de Usuarios" para localizar rápidamente lo que necesita.</li>
         <li><strong>No puedo guardar cambios</strong>: Verifique que ha completado todos los campos requeridos del formulario correctamente antes de guardar.</li>
-        <li><strong>Error al generar reportes</strong>: Asegúrese de seleccionar un período de tiempo válido y que haya datos disponibles para ese período.</li>
     </ul>
 
     <p>Para más asistencia, por favor contacte a nuestro equipo de soporte técnico.</p>

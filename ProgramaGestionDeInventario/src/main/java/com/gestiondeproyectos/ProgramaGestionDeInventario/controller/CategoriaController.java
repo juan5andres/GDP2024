@@ -48,19 +48,6 @@ public class CategoriaController{
         }
         return "redirect:/listarCategorias";
     }
-    /*@GetMapping("/agregarCategoria")
-    public String agregarCategoria(Categoria categoria) {
-        // Va a retornar otra vista llamada 'modificar' que estará definida en
-        // '/templates/modificar.html'
-        // Se va a llamar 'modificar' ya que va a realizar los dos casos de uso: agregar
-        // y modificar
-        return "modificarCategoria";
-    }
-    @PostMapping("/guardarCategoria")
-    public String guardarCategoria(Categoria categoria) {
-        categoriaService.guardar(categoria);
-        return "redirect:/";
-        }*/
 
     @GetMapping("/editarCategoria/{id}")
     public String mostrarFormularioEditarCategoria(@PathVariable("id") Long id, Model model) {
@@ -83,24 +70,6 @@ public class CategoriaController{
         }
         return "redirect:/listarCategorias";
     }
-
-    /*@GetMapping("/editarCategoria/{iden}")
-    public String editarCategoria(Categoria categoria, Model model) {
-        categoria = categoriaService.encontrarCategoria(categoria);
-        model.addAttribute("categoria", categoria);
-        return "modificarCategoria";
-    }
-
-    @GetMapping("/eliminarCategoria")
-    public String eliminarCategoria(Categoria categoria) {
-        if(categoriaService.categoriaNoVinculada(categoria)){
-            categoriaService.eliminar(categoria);
-            return "redirect:/";
-        }
-        else{
-            return "redirect:/";
-        }
-    }*/
 
     @GetMapping("/listarCategorias")
     public String listarCategorias(Model model) {

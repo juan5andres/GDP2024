@@ -15,5 +15,6 @@ public interface ProveedorService {
     void guardar(Proveedor proveedor);
 
     void eliminar(Long iden);
+
+    public Proveedor obtenerProveedorPorId(Long id);
 }
-//List<Proveedor> searchProvidersByPerson(Long iden);

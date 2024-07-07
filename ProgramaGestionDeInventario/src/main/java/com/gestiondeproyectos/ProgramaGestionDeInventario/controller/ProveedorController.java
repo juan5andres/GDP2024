@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -27,25 +28,48 @@ public class ProveedorController {
         this.proveedorService = proveedorService;
     }
 
-    @GetMapping("/crearProveedor")
-    public String mostrarFormulario(Model model) {
-        Proveedor proveedor = new Proveedor();
-        proveedor.setBaja(false);
+    @GetMapping({"/crearProveedor", "/editarProveedor/{id}"})
+    public String mostrarFormulario(@PathVariable(value = "id", required = false) Long id, Model model) {
+        Proveedor proveedor;
+        if (id != null) {
+            proveedor = proveedorService.obtenerProveedorPorId(id);
+            if (proveedor == null) {
+                return "redirect:/listarProveedores"; // Redirige a la lista de proveedores si el proveedor no existe
+            }
+        } else {
+            proveedor = new Proveedor();
+            proveedor.setBaja(false);
+        }
         model.addAttribute("proveedor", proveedor);
         return "crearProveedor";
     }
 
+
     @PostMapping("/crearProveedor")
-    public String crearProveedor(Proveedor proveedor) {
-        Proveedor proveedorAux = proveedorService.findByName(proveedor.getNombre());
-        if (proveedorAux!=null && !proveedorAux.getIden().equals(proveedor.getIden()) && proveedorAux.getNombre().equals(proveedor.getNombre())){
-            return "crearProveedor";
+    public String guardarProveedor(@ModelAttribute("proveedor") Proveedor proveedor) {
+        // Si el proveedor tiene un ID, significa que ya existe y debe ser actualizado
+        if (proveedor.getIden() != null) {
+            // Obtener el proveedor existente de la base de datos
+            Proveedor proveedorExistente = proveedorService.encontrarProveedor(proveedor);
+            if (proveedorExistente != null) {
+                // Actualizar los campos del proveedor existente con los valores del formulario
+                proveedorExistente.setNombre(proveedor.getNombre());
+                proveedorExistente.setEmail(proveedor.getEmail());
+                proveedorExistente.setTelefono(proveedor.getTelefono());
+                proveedorExistente.setDomicilio(proveedor.getDomicilio());
+                proveedorExistente.setCuit(proveedor.getCuit());
+
+                // Guardar el proveedor actualizado
+                proveedorService.guardar(proveedorExistente);
+            }
+        } else {
+            // Si el proveedor no tiene un ID, es un nuevo proveedor y debe ser creado
+            proveedorService.guardar(proveedor);
         }
-        proveedor.setBaja(false);
-        proveedorService.guardar(proveedor);
         return "redirect:/listarProveedores";
     }
-    
+
+
     @PostMapping("/guardarProveedor")
     public String guardarProveedor(Proveedor proveedor, Model model){
         //var personas = personaService.listarPersonas();
@@ -56,17 +80,18 @@ public class ProveedorController {
         return "redirect:/";
     }
 
-    @GetMapping("/editarProveedor/{iden}")
-    public String editarProveedor(Proveedor proveedor, Model modelProveedor, Model modelPersona, Model modelCategoria) {
-        //var personas = personaService.listarPersonas();
-        //modelPersona.addAttribute("personas", personas);
-        var categorias = categoriaService.listarCategorias();
-        modelCategoria.addAttribute("categorias", categorias);
-        proveedor = proveedorService.encontrarProveedor(proveedor);
-        modelProveedor.addAttribute("proveedor", proveedor);
-        return "crearProveedor";
-    }
-    
+    /*@GetMapping("/editarProveedor/{id}")
+    public String mostrarFormularioEditarProveedor(@PathVariable("id") Long id, Model model) {
+        Proveedor proveedor = proveedorService.obtenerProveedorPorId(id);
+        if (proveedor != null) {
+            model.addAttribute("proveedor", proveedor);
+            return "crearProveedor"; // Reutilizamos la misma vista para creación y edición
+        } else {
+            return "redirect:/listarProveedores"; // Redirige a la lista de proveedores si el proveedor no existe
+        }
+    }*/
+
+
     @PostMapping("/eliminarProveedor/{iden}")
     public String eliminarProveedor(@PathVariable Long iden) {
         proveedorService.eliminar(iden);

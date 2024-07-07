@@ -56,10 +56,9 @@ public class ProveedorServiceImpl implements ProveedorService {
       estado = !estado;
       proveedorDao.eliminar(estado, proveedor.getIden());
     }
-}
 
-/*@Override
-@Transactional(readOnly=true)
-public List<Proveedor> searchProvidersByPerson(Long iden) {
-    return proveedorDao.listProvidersByPerson(iden);
-}*/
+    @Override
+    public Proveedor obtenerProveedorPorId(Long id) {
+        return proveedorDao.findById(id).orElse(null);
+    }
+}

@@ -2,6 +2,7 @@ package com.gestiondeproyectos.ProgramaGestionDeInventario.service;
 
 import com.gestiondeproyectos.ProgramaGestionDeInventario.dao.ArticuloDao;
 import com.gestiondeproyectos.ProgramaGestionDeInventario.model.Articulo;
+import com.gestiondeproyectos.ProgramaGestionDeInventario.model.Categoria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -79,5 +80,10 @@ public class ArticuloServiceImpl implements ArticuloService {
             }
         }
         return articulosVencidosOPorVencer;
+    }
+
+    @Override
+    public Articulo obtenerArticuloPorId(Long id) {
+        return articuloDao.findById(id).orElseThrow(() -> new IllegalArgumentException("Categoría no encontrada"));
     }
 }

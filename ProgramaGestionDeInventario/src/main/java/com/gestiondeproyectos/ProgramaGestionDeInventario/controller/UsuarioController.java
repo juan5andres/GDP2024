@@ -134,7 +134,7 @@ public class UsuarioController {
             return "redirect:/index";
         }
         usuarioService.actualizarUsuario(usuario);
-        return "redirect:/index";
+        return "redirect:/listarUsuarios";
     }
     
 }
