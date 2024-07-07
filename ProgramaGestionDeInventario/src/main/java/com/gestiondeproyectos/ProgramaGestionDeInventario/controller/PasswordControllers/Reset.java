@@ -36,14 +36,13 @@ public class Reset {
     }
  
     @GetMapping
-    public String displayResetPasswordPage(@RequestParam(required = false) String token,
-                                           Model model) {
- 
+    public String displayResetPasswordPage(@RequestParam(required = false) String token, Model model) {
         PasswordResetToken resetToken = tokenRepository.findByToken(token);
         if (resetToken == null){
             model.addAttribute("error", "No hemos encontrado la solicitud de cambio de contraseña.");
         } else if (resetToken.isExpired()){
             model.addAttribute("error", "La solicitud de cambio de contraseña ha expirado, por favor, solicite una nueva.");
+            tokenRepository.delete(resetToken);
         } else {
             model.addAttribute("token", resetToken.getToken());
         }
@@ -59,6 +58,11 @@ public class Reset {
  
         if (result.hasErrors()){
             redirectAttributes.addFlashAttribute(BindingResult.class.getName() + ".passwordResetForm", result);
+            redirectAttributes.addFlashAttribute("passwordResetForm", form);
+            return "redirect:/reset-password?token=" + form.getToken();
+        }
+        if (!form.getPassword().equals(form.getConfirmPassword())) {
+            redirectAttributes.addFlashAttribute("error", "Las contraseñas no coinciden.");
             redirectAttributes.addFlashAttribute("passwordResetForm", form);
             return "redirect:/reset-password?token=" + form.getToken();
         }

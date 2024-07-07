@@ -1,5 +1,6 @@
 package com.gestiondeproyectos.ProgramaGestionDeInventario.service;
 
+import com.gestiondeproyectos.ProgramaGestionDeInventario.model.PasswordResetToken;
 import com.gestiondeproyectos.ProgramaGestionDeInventario.model.Usuario;
 
 import java.util.List;
@@ -18,4 +19,5 @@ public interface UsuarioService {
     void eliminar(Long iden);
     Usuario findByIden(Long iden);
     void actualizarUsuario(Usuario user);
+    PasswordResetToken recuperarToken(Usuario user);
 }

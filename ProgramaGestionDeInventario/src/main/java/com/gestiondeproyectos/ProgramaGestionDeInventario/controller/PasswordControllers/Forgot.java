@@ -63,11 +63,16 @@ public class Forgot {
             result.rejectValue("email", null, "No hemos podido encontrar tu mail. Revisa que no tenga errores.");
             return "forgot-password";
         }
- 
+        PasswordResetToken passwordResetToken = userService.recuperarToken(user);
+        if (passwordResetToken != null){
+            result.rejectValue("email", null, "Ya has solicitado un cambio de contraseña recientemente, revisa tu mail. Si no lo encuentras, revisa la carpeta de spam también. Si tampoco se encuentra allí, espera 15 minutos y solicita el cambio de nuevo.");
+            return "forgot-password";
+        }
+
         PasswordResetToken token = new PasswordResetToken();
         token.setToken(UUID.randomUUID().toString());
         token.setUser(user);
-        token.setExpiryDate(30);
+        token.setExpiryDate(15);
         tokenRepository.save(token);
  
         Mail mail = new Mail();

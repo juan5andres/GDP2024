@@ -1,6 +1,7 @@
 package com.gestiondeproyectos.ProgramaGestionDeInventario.dao;
 
 import com.gestiondeproyectos.ProgramaGestionDeInventario.model.Articulo;
+import com.gestiondeproyectos.ProgramaGestionDeInventario.model.PasswordResetToken;
 import com.gestiondeproyectos.ProgramaGestionDeInventario.model.Usuario;
 
 import jakarta.transaction.Transactional;
@@ -27,4 +28,7 @@ public interface UsuarioDao extends JpaRepository<Usuario, Long> {
     void updatePassword(@Param("updatedPassword") String updatedPassword, @Param("userId") Long userId);
 
     Usuario findByIden(Long iden);
+
+    @Query("SELECT t FROM PasswordResetToken t WHERE t.user.iden = :userId")
+    PasswordResetToken recuperarToken(@Param("userId") Long userId);
 }

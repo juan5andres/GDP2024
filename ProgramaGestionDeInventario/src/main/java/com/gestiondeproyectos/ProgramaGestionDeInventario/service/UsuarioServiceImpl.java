@@ -2,6 +2,7 @@ package com.gestiondeproyectos.ProgramaGestionDeInventario.service;
 
 import com.gestiondeproyectos.ProgramaGestionDeInventario.dao.UsuarioDao;
 import com.gestiondeproyectos.ProgramaGestionDeInventario.model.Articulo;
+import com.gestiondeproyectos.ProgramaGestionDeInventario.model.PasswordResetToken;
 import com.gestiondeproyectos.ProgramaGestionDeInventario.model.Usuario;
 import com.gestiondeproyectos.ProgramaGestionDeInventario.dao.RolDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,5 +85,9 @@ public class UsuarioServiceImpl implements UsuarioService {
     public void actualizarUsuario(Usuario user) {
         usuarioDao.save(user);
     }
-    
+    @Override
+    public PasswordResetToken recuperarToken(Usuario user){
+        Long userId = user.getIden();
+        return usuarioDao.recuperarToken(userId);
+    }
 }
