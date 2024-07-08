@@ -46,32 +46,6 @@ public class UsuarioController {
         return "listarUsuarios";
     }
 
-    /*@GetMapping("/crearUsuario")
-    public String crearUsuario(Model model){
-        List<Rol> roles = rolService.listarRoles();
-        model.addAttribute("roles", roles);
-        model.addAttribute("usuario", new Usuario());
-        return "crearUsuario";
-    }
-
-    @PostMapping("/crearUsuario")
-    public String guardarUsuario(Usuario usuario){
-        usuarioService.guardar(usuario);
-        return "redirect:/listarUsuarios";
-    }*/
-        
-    @GetMapping("/crearUsuarioConPermisos")
-    public String crearUsuario(Model model, Authentication authentication){
-        Usuario sessionUser =(Usuario) authentication.getPrincipal();
-        if(sessionUser.getRol().getDescripcion().equals("Usuario")){
-            return "redirect:/listarUsuarios";
-        }
-        List<RolEnum> roles = Arrays.asList(RolEnum.values());
-        model.addAttribute("roles", roles);
-        model.addAttribute("usuario", new Usuario());
-        return "crearUsuario";
-    }
-
     @GetMapping("/crearUsuario")
     public String crearUsuario(Model model){
         List<RolEnum> roles = Arrays.asList(RolEnum.values());
@@ -81,22 +55,28 @@ public class UsuarioController {
     }
 
     @PostMapping("/crearUsuario")
-    public String guardarUsuario(Usuario usuario){
+    public String guardarUsuario(Usuario usuario, Model model) {
         Usuario usuarioAux = usuarioService.findByEmail(usuario.getEmail());
-        if (usuarioAux==null){
-            usuarioAux = usuarioService.findByUsername(usuario.getNombre());
-            if (usuarioAux!=null && !usuarioAux.getIden().equals(usuario.getIden()) && usuarioAux.getNombre().equals(usuario.getNombre())){
-                return "crearUsuario";
-            }
-        }else{
-            if(!usuarioAux.getIden().equals(usuario.getIden()) && usuarioAux.getEmail().equals(usuario.getEmail())){
-                return "crearUsuario";
-            }
+        if (usuarioAux != null && !usuarioAux.getIden().equals(usuario.getIden())) {
+            model.addAttribute("errorMessage", "El email ya está en uso.");
+            List<RolEnum> roles = Arrays.asList(RolEnum.values());
+            model.addAttribute("roles", roles);
+            return "crearUsuario";
         }
+
+        usuarioAux = usuarioService.findByUsername(usuario.getNombre());
+        if (usuarioAux != null && !usuarioAux.getIden().equals(usuario.getIden())) {
+            model.addAttribute("errorMessage", "El nombre de usuario ya está en uso.");
+            List<RolEnum> roles = Arrays.asList(RolEnum.values());
+            model.addAttribute("roles", roles);
+            return "crearUsuario";
+        }
+
         usuario.setRol(usuario.getRol());
         usuarioService.guardar(usuario);
         return "redirect:/listarUsuarios";
     }
+
 
     @PostMapping("/eliminarUsuario/{iden}")
     public String eliminarUsuario(@PathVariable Long iden) {
