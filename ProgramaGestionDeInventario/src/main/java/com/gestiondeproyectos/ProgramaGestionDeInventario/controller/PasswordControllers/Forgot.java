@@ -49,6 +49,7 @@ public class Forgot {
         return "forgot-password";
     }
  
+    @SuppressWarnings("null")
     @PostMapping
     public String processForgotPasswordForm(@ModelAttribute("forgotPasswordForm") @Validated PasswordForgotDto form,
                                             BindingResult result,
