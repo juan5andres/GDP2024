@@ -74,7 +74,7 @@ public class ProveedorServiceImpl implements ProveedorService {
         if (proveedorNoVinculado(proveedor)) {
             proveedorDao.delete(proveedor);
         } else {
-            throw new IllegalStateException("El proveedor está vinculado a artículos y no puede ser eliminado.");
+            throw new IllegalStateException("El proveedor esta vinculado a articulos y no puede ser eliminado.");
         }
     }
 

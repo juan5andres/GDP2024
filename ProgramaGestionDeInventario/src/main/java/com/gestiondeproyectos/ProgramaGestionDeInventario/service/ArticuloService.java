@@ -20,4 +20,6 @@ public interface ArticuloService {
     public void eliminar(Long iden);
 
     public Articulo obtenerArticuloPorId(Long id);
+
+    Articulo findByCode(String codigo);
 }

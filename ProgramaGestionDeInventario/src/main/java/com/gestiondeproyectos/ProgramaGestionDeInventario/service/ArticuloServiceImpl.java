@@ -86,4 +86,9 @@ public class ArticuloServiceImpl implements ArticuloService {
     public Articulo obtenerArticuloPorId(Long id) {
         return articuloDao.findById(id).orElseThrow(() -> new IllegalArgumentException("Categoría no encontrada"));
     }
+
+    @Override
+    public Articulo findByCode(String codigo) {
+        return articuloDao.findByCodigoProducto(codigo);
+    }
 }

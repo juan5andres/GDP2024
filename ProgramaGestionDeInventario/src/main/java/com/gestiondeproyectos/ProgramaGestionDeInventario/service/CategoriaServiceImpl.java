@@ -47,7 +47,7 @@ public class CategoriaServiceImpl implements CategoriaService{
         if (categoriaNoVinculada(categoria)) {
             categoriaDao.delete(categoria);
         } else {
-            throw new IllegalStateException("La categoría está vinculada a artículos o proveedores y no puede ser eliminada.");
+            throw new IllegalStateException("La categoria esta vinculada a articulos o proveedores y no puede ser eliminada.");
         }
     }
     @Override

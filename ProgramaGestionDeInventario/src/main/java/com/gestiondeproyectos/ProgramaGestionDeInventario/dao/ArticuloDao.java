@@ -33,7 +33,7 @@ public interface ArticuloDao extends JpaRepository<Articulo, Long> {
             "WHERE c.descripcion = :descripcion", nativeQuery = true)
     List<Articulo> listItemsByCategoryDescription(@Param("descripcion") String descripcion);
 
-
+    Articulo findByCodigoProducto(String code);
 
     /*@Query(value = "SELECT a.*, c.descripcion AS categoria_descripcion, (a.stock * a.precio_unitario) AS producto_precio_Total FROM articulo a " +
             "JOIN categoria_por_articulo cpa ON a.iden = cpa.articulo_iden " +

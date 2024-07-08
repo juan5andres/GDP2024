@@ -74,8 +74,12 @@ public class ArticuloController {
                 articuloService.guardar(articuloExistente);
             }
         } else {
-            // Si el artículo no tiene un ID, es un nuevo artículo y debe ser creado
-            articuloService.guardar(articulo);
+            Articulo articuloAux = articuloService.findByCode(articulo.getCodigoProducto());
+            if(articuloAux == null){
+                articuloService.guardar(articulo);
+            }else{
+                return "crearArticulo";
+            }
         }
         return "redirect:/listarArticulos";
     }
